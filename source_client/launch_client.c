@@ -2,10 +2,13 @@
 ** EPITECH PROJECT, 2018
 ** PSU_zappy_2017
 ** File description:
-** client.c
+** launch_client.c
 */
 
-int		main()
+#include "client.h"
+
+int		launch_client(t_client *client)
 {
+	
 	return (0);
 }
