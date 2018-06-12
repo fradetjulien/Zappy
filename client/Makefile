@@ -13,22 +13,28 @@ CFLAGS += -Wextra -Wall -I include_client/
 
 NAME_CLIENT    = ../zappy_ai
 
-SRC_CLIENT     =        source_client/client.c 			\
-			source_client/close_socket.c 		\
-			source_client/connection_serveur.c 	\
-			source_client/free_client.c 		\
-			source_client/help_client.c 		\
-			source_client/init_client.c 		\
-			source_client/init_socket.c 		\
-			source_client/isHostname.c 		\
-			source_client/isPort.c 			\
-			source_client/isWriteArguments.c 	\
-			source_client/launch_client.c		\
-			source_client/execute_instruction.c	\
-			source_client/find_instruction.c	\
-			source_client/init_instruction.c	\
-			source_client/instructions.c		\
-			source_client/read_instruction.c
+SRC_CLIENT     =        source_client/handle_client/client.c 			\
+			source_client/handle_socket/close_socket.c 		\
+			source_client/handle_socket/connection_server.c 	\
+			source_client/handle_client/free_client.c 		\
+			source_client/handle_client/help_client.c 		\
+			source_client/handle_client/init_client.c 		\
+			source_client/handle_socket/init_socket.c 		\
+			source_client/handle_arguments/isHostname.c 		\
+			source_client/handle_arguments/isPort.c 		\
+			source_client/handle_arguments/isWriteArguments.c 	\
+			source_client/handle_client/launch_client.c		\
+			source_client/handle_instructions/execute_instruction.c	\
+			source_client/handle_instructions/find_instruction.c	\
+			source_client/handle_instructions/init_instructions.c	\
+			source_client/handle_instructions/instructions.c	\
+			source_client/handle_instructions/read_instruction.c	\
+			source_client/handle_instructions/send_instruction.c	\
+			source_client/handle_instructions/get_instruction.c	\
+			source_client/handle_instructions/instructions_2.c	\
+			source_client/handle_instructions/print_instruction.c	\
+			source_client/library/get_next_line.c
+
 
 OBJ_CLIENT     = $(SRC_CLIENT:.c=.o)
 

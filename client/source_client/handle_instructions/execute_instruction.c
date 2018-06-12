@@ -12,7 +12,7 @@ int			execute_instruction(t_client *client, char *instruction)
 	t_instructions	instruct;
 	int		this = 0;
 
-	init_instructions(&instruct);
+	init_instructions(&instruct, client, instruction);
 	this = find_instruction(instruction);
 	if (this == -1)
 		return (-1);

@@ -20,6 +20,8 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 
+# define READ_SIZE 128
+
 # define LOCALHOST	"127.0.0.1"
 
 typedef struct			s_socket
@@ -44,26 +46,33 @@ typedef struct			s_instructions
 	int			(*_instructions[21])(t_client *client, char *instruction);
 }				t_instructions;
 
-/* Gestion Client */
+/* Handle Client */
 t_socket			*init_client(t_client *client);
 void				free_client(t_client client);
 void				help_client(char *binary);
 int				launch_client(t_client *client);
 
-/* Gestion Arguments */
+/* Handle Arguments */
 int				isWriteArguments(t_client *client, char **av);
 int				isHostname(char *host);
 int				isPort(char *port);
 
-/* Gestion Socket */
+/* Handle Socket */
 int				init_socket(t_client *client, const char *protocol);
 int				close_socket(t_client *client);
-int				connection_serveur(t_client *client);
+int				connection_server(t_client *client);
 
-/* Gestion Instruction */
-void				init_instructions(t_instructions *instructions);
+/* Handle Instruction */
+void				init_instructions(t_instructions *instructions,
+						  t_client *client, char *instruction);
+char				*print_instruction(char *instruction_received);
+char				*get_instruction(t_client *client);
 int				read_instruction(t_client *client);
 int				find_instruction(char *instruction);
 int				execute_instruction(t_client *client, char *instruction);
+int				send_instruction(t_client *client, char *instruction);
+
+/* Library */
+char				*get_next_line(const int);
 
 #endif /* !CLIENT_H_ */

@@ -5,7 +5,7 @@
 ** find_instruction.c
 */
 
-//#include "client.h"
+#include "client.h"
 
 void	init_realInstructions_one(char **realInstructions)
 {
@@ -15,8 +15,8 @@ void	init_realInstructions_one(char **realInstructions)
 	realInstructions[3] = "look\n";
 	realInstructions[4] = "inventory\n";
 	realInstructions[5] = "broadcast text\n";
-	realInstructions[6] = "connect_nbr\n";
-	realInstructions[7] = "fork\n";
+	realInstructions[6] = "cmd_connect\n";
+	realInstructions[7] = "cmd_fork\n";
 	realInstructions[8] = "eject\n";
 	realInstructions[9] = "take oject\n";
 	realInstructions[10] = "set oject\n";
@@ -39,8 +39,6 @@ void	init_realInstructions_two(char **realInstructions)
 int		find_instruction(char *instruction)
 {
 	int	position = 0;
-	int	i = 0;
-	int	j = 0;
 	char	*realInstructions[21];
 
 	init_realInstructions_one(realInstructions);

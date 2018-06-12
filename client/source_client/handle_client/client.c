@@ -16,7 +16,7 @@ int			main(int ac, char **av)
 		help_client(av[0]);
 		return (-1);
 	}
-	if (connection_serveur(&client) == -1) {
+	if (connection_server(&client) == -1) {
 		return (-1);
 	}
 	if (launch_client(&client) == -1) {

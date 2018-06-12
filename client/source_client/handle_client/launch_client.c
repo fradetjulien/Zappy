@@ -9,12 +9,24 @@
 
 int			check_fds(t_client *client)
 {
+	static int	is_AlreadySend = 0;
+	char		*instruction_received = NULL;
+
 	if (FD_ISSET(0, client->read)) {
 		if (read_instruction(client) == -1)
 			return (-1);
 	}
 	if (FD_ISSET(client->socket->fd, client->read)) {
-		
+		instruction_received = get_instruction(client);
+		if (is_AlreadySend == 0 && instruction_received != NULL) {
+			if (send_instruction(client, client->team) == -1)
+				return (-1);
+			is_AlreadySend = 1;
+			instruction_received = print_instruction(instruction_received);
+		}
+		if (is_AlreadySend == 1) {
+			
+		}
 	}
 	return (0);
 }
@@ -42,9 +54,8 @@ int			launch_client(t_client *client)
 			printf("Select error\n");
 			return (-1);
 		}
-		if (check_fds(client) == -1) {
+		if (check_fds(client) == -1)
 			return (-1);
-		}
 	}
 	return (0);
 }
