@@ -5,13 +5,10 @@
 ** find_instruction.c
 */
 
-#include "client.h"
+//#include "client.h"
 
-int		find_instruction(char *instruction)
+void	init_realInstructions_one(char **realInstructions)
 {
-	int	position = 0;
-	char	*realInstructions[21];
-
 	realInstructions[0] = "forward\n";
 	realInstructions[1] = "right\n";
 	realInstructions[2] = "left\n";
@@ -23,6 +20,10 @@ int		find_instruction(char *instruction)
 	realInstructions[8] = "eject\n";
 	realInstructions[9] = "take oject\n";
 	realInstructions[10] = "set oject\n";
+}
+
+void	init_realInstructions_two(char **realInstructions)
+{
 	realInstructions[11] = "incantation";
 	realInstructions[12] = "msz";
 	realInstructions[13] = "bct";
@@ -33,6 +34,17 @@ int		find_instruction(char *instruction)
 	realInstructions[18] = "pin";
 	realInstructions[19] = "sgt";
 	realInstructions[20] = "sst T";
+}
+
+int		find_instruction(char *instruction)
+{
+	int	position = 0;
+	int	i = 0;
+	int	j = 0;
+	char	*realInstructions[21];
+
+	init_realInstructions_one(realInstructions);
+	init_realInstructions_two(realInstructions);
 	while (position < 10 && (strcmp(instruction, realInstructions[position])) != 0)
 		position++;
 	if (position > 9)
