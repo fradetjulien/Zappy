@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-int		isWriteArguments(char **av)
+int		isWriteArguments(t_client *client, char **av)
 {
 	if ((strcmp(av[0], "./zappy_ai") != 0) ||
 	    (strcmp(av[1], "-p") != 0) ||
@@ -15,8 +15,13 @@ int		isWriteArguments(char **av)
 	    (strcmp(av[5], "-h") != 0)) {
 		return (-1);
 	}
-	if (isHostname(av[6]) != 0 || isPort(av[2]) != 0) {
+	else if (isHostname(av[6]) != 0 || isPort(av[2]) != 0) {
 		return (-1);
+	}
+	else {
+		client->port = strdup(av[2]);
+		client->team = strdup(av[4]);
+		client->host = strdup(av[6]);
 	}
 	return (0);
 }
