@@ -13,17 +13,22 @@ CFLAGS += -Wextra -Wall -I include_client/
 
 NAME_CLIENT    = ../zappy_ai
 
-SRC_CLIENT     =        source_client/client.c \
-			source_client/close_socket.c \
-			source_client/connection_serveur.c \
-			source_client/free_client.c \
-			source_client/help_client.c \
-			source_client/init_client.c \
-			source_client/init_socket.c \
-			source_client/isHostname.c \
-			source_client/isPort.c \
-			source_client/isWriteArguments.c \
-			source_client/launch_client.c
+SRC_CLIENT     =        source_client/client.c 			\
+			source_client/close_socket.c 		\
+			source_client/connection_serveur.c 	\
+			source_client/free_client.c 		\
+			source_client/help_client.c 		\
+			source_client/init_client.c 		\
+			source_client/init_socket.c 		\
+			source_client/isHostname.c 		\
+			source_client/isPort.c 			\
+			source_client/isWriteArguments.c 	\
+			source_client/launch_client.c		\
+			source_client/execute_instruction.c	\
+			source_client/find_instruction.c	\
+			source_client/init_instruction.c	\
+			source_client/instructions.c		\
+			source_client/read_instruction.c
 
 OBJ_CLIENT     = $(SRC_CLIENT:.c=.o)
 

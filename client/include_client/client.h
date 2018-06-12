@@ -41,7 +41,7 @@ typedef struct			s_client
 
 typedef struct			s_instructions
 {
-	int			(*_instructions[10])(t_client *client, char *instruction);
+	int			(*_instructions[21])(t_client *client, char *instruction);
 }				t_instructions;
 
 /* Gestion Client */

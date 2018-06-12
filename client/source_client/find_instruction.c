@@ -10,7 +10,7 @@
 int		find_instruction(char *instruction)
 {
 	int	position = 0;
-	char	*realInstructions[12];
+	char	*realInstructions[21];
 
 	realInstructions[0] = "forward\n";
 	realInstructions[1] = "right\n";
@@ -24,6 +24,15 @@ int		find_instruction(char *instruction)
 	realInstructions[9] = "take oject\n";
 	realInstructions[10] = "set oject\n";
 	realInstructions[11] = "incantation";
+	realInstructions[12] = "msz";
+	realInstructions[13] = "bct";
+	realInstructions[14] = "mct";
+	realInstructions[15] = "tna";
+	realInstructions[16] = "ppo";
+	realInstructions[17] = "plv";
+	realInstructions[18] = "pin";
+	realInstructions[19] = "sgt";
+	realInstructions[20] = "sst T";
 	while (position < 10 && (strcmp(instruction, realInstructions[position])) != 0)
 		position++;
 	if (position > 9)
