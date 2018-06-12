@@ -18,6 +18,7 @@
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <netdb.h>
+#include <arpa/inet.h>
 
 # define LOCALHOST	"127.0.0.1"
 
@@ -38,6 +39,11 @@ typedef struct			s_client
 	t_socket		*socket;
 }				t_client;
 
+typedef struct			s_instructions
+{
+	int			(*_instructions[10])(t_client *client, char *instruction);
+}				t_instructions;
+
 /* Gestion Client */
 t_socket			*init_client(t_client *client);
 void				free_client(t_client client);
@@ -53,5 +59,11 @@ int				isPort(char *port);
 int				init_socket(t_client *client, const char *protocol);
 int				close_socket(t_client *client);
 int				connection_serveur(t_client *client);
+
+/* Gestion Instruction */
+void				init_instructions(t_instructions *instructions);
+int				read_instruction(t_client *client);
+int				find_instruction(char *instruction);
+int				execute_instruction(t_client *client, char *instruction);
 
 #endif /* !CLIENT_H_ */

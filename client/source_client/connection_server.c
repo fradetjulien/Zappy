@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-int		connection_serveur(t_client *client)
+int		connection_server(t_client *client)
 {
 	int	error = 0;
 

@@ -10,7 +10,6 @@
 int			main(int ac, char **av)
 {
 	t_client	client;
-	int		error = 0;
 
 	client.socket = init_client(&client);
 	if (ac != 7 || isWriteArguments(&client, av) != 0) {
