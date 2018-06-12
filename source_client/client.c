@@ -17,11 +17,12 @@ int			main(int ac, char **av)
 		help_client(av[0]);
 		return (-1);
 	}
-	error = connection_serveur(&client);
-	if (error == -1) {
+	if (connection_serveur(&client) == -1) {
 		return (-1);
 	}
-	launch_client(&client);
+	if (launch_client(&client) == -1) {
+		return (-1);
+	}
 	free_client(client);
 	return (0);
 }
