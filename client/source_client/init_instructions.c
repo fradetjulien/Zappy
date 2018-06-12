@@ -9,7 +9,7 @@
 
 void		init_instructions(t_instructions *instru)
 {
-	instru->_instructions =
+	instru->_instructions =;
 /*		&forward, &right, &left,
 		&look, &inventory, &bro,
 		&broadcast, &connect, &fork,

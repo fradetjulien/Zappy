@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2018
+## PSU_zappy_2017
+## File description:
+## Makefile
+##
+
 CC      = gcc -g
 
 RM      = rm -f

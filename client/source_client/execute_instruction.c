@@ -16,6 +16,6 @@ int			execute_instruction(t_client *client, char *instruction)
 	this = find_instruction(instruction);
 	if (this == -1)
 		return (-1);
-	instruct->_instructions[this](client, instruction);
+	instruct._instructions[this](client, instruction);
 	return (0);
 }
