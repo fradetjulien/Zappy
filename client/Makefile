@@ -20,9 +20,9 @@ SRC_CLIENT     =        source_client/handle_client/client.c 			\
 			source_client/handle_client/help_client.c 		\
 			source_client/handle_client/init_client.c 		\
 			source_client/handle_socket/init_socket.c 		\
-			source_client/handle_arguments/isHostname.c 		\
-			source_client/handle_arguments/isPort.c 		\
-			source_client/handle_arguments/isWriteArguments.c 	\
+			source_client/handle_arguments/is_hostname.c 		\
+			source_client/handle_arguments/is_port.c 		\
+			source_client/handle_arguments/is_writearguments.c 	\
 			source_client/handle_client/launch_client.c		\
 			source_client/handle_instructions/execute_instruction.c	\
 			source_client/handle_instructions/find_instruction.c	\

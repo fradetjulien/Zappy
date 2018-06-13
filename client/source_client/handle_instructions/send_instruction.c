@@ -7,7 +7,7 @@
 
 #include "client.h"
 
-int		send_instruction(t_client  *client, char *instruction)
+int		send_instruction(t_client *client, char *instruction)
 {
 	int	error = 0;
 

@@ -10,25 +10,25 @@
 int			check_fds(t_client *client)
 {
 	static int	is_AlreadySend = 0;
-	char		*instruction_received = NULL;
+	char		*instructReceived = NULL;
+	int		error = 0;
 
 	if (FD_ISSET(0, client->read)) {
 		if (read_instruction(client) == -1)
 			return (-1);
 	}
 	if (FD_ISSET(client->socket->fd, client->read)) {
-		instruction_received = get_instruction(client);
-		if (is_AlreadySend == 0 && instruction_received != NULL) {
-			if (send_instruction(client, client->team) == -1)
-				return (-1);
+		instructReceived = get_instruction(client);
+		if (is_AlreadySend == 0 && instructReceived != NULL) {
+			error = send_instruction(client, client->team);
 			is_AlreadySend = 1;
-			instruction_received = print_instruction(instruction_received);
+			instructReceived = print_instruction(instructReceived);
 		}
 		if (is_AlreadySend == 1) {
-			
+
 		}
 	}
-	return (0);
+	return (error);
 }
 
 void			init_fds(t_client *client, struct timeval *time)

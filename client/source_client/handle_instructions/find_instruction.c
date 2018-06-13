@@ -7,44 +7,44 @@
 
 #include "client.h"
 
-void	init_realInstructions_one(char **realInstructions)
+void	init_realinstructions(char **real_instructions)
 {
-	realInstructions[0] = "forward\n";
-	realInstructions[1] = "right\n";
-	realInstructions[2] = "left\n";
-	realInstructions[3] = "look\n";
-	realInstructions[4] = "inventory\n";
-	realInstructions[5] = "broadcast text\n";
-	realInstructions[6] = "cmd_connect\n";
-	realInstructions[7] = "cmd_fork\n";
-	realInstructions[8] = "eject\n";
-	realInstructions[9] = "take oject\n";
-	realInstructions[10] = "set oject\n";
+	real_instructions[0] = "forward\n";
+	real_instructions[1] = "right\n";
+	real_instructions[2] = "left\n";
+	real_instructions[3] = "look\n";
+	real_instructions[4] = "inventory\n";
+	real_instructions[5] = "broadcast text\n";
+	real_instructions[6] = "cmd_connect\n";
+	real_instructions[7] = "cmd_fork\n";
+	real_instructions[8] = "eject\n";
+	real_instructions[9] = "take oject\n";
+	real_instructions[10] = "set oject\n";
 }
 
-void	init_realInstructions_two(char **realInstructions)
+void	init_realinstructions2(char **real_instructions)
 {
-	realInstructions[11] = "incantation";
-	realInstructions[12] = "msz";
-	realInstructions[13] = "bct";
-	realInstructions[14] = "mct";
-	realInstructions[15] = "tna";
-	realInstructions[16] = "ppo";
-	realInstructions[17] = "plv";
-	realInstructions[18] = "pin";
-	realInstructions[19] = "sgt";
-	realInstructions[20] = "sst ";
+	real_instructions[11] = "incantation";
+	real_instructions[12] = "msz";
+	real_instructions[13] = "bct";
+	real_instructions[14] = "mct";
+	real_instructions[15] = "tna";
+	real_instructions[16] = "ppo";
+	real_instructions[17] = "plv";
+	real_instructions[18] = "pin";
+	real_instructions[19] = "sgt";
+	real_instructions[20] = "sst ";
 }
 
 int		find_instruction(char *instruction)
 {
 	int	position = 0;
-	char	*realInstructions[21];
+	char	*realinstructions[21];
 
-	init_realInstructions_one(realInstructions);
-	init_realInstructions_two(realInstructions);
-	while (position < 21 && (strncmp(instruction, realInstructions[position],
-					 strlen(realInstructions[position])) != 0))
+	init_realinstructions(realinstructions);
+	init_realinstructions2(realinstructions);
+	while (position < 21 && (strncmp(instruction,
+	realinstructions[position], strlen(realinstructions[position])) != 0))
 		position++;
 	if (position > 20)
 		return (-1);

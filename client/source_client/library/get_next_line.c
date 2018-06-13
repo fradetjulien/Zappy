@@ -22,14 +22,15 @@ int			select_c(const int fd, char *str)
 		*str = '\0';
 		i = -1;
 	}
-	else
+	else {
 		if (buffer[i] == '\n')
 			*str = '\0';
 		else {
 			*str = buffer[i];
 			*(str + 1) = 0;
 		}
-	i++;
+		i++;
+	}
 	return (nbr);
 }
 

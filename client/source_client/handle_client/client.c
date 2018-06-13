@@ -12,7 +12,7 @@ int			main(int ac, char **av)
 	t_client	client;
 
 	client.socket = init_client(&client);
-	if (ac != 7 || isWriteArguments(&client, av) != 0) {
+	if (ac != 7 || is_writearguments(&client, av) != 0) {
 		help_client(av[0]);
 		return (-1);
 	}

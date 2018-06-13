@@ -18,8 +18,9 @@ int		connection_server(t_client *client)
 	client->socket->s.sin_family = AF_INET;
 	client->socket->s.sin_addr.s_addr = inet_addr(client->host);
 	client->socket->s.sin_port = htons(atoi(client->port));
-	error = connect(client->socket->fd, (const struct sockaddr *)&client->socket->s,
-			sizeof(client->socket->s));
+	error = connect(client->socket->fd,
+		(const struct sockaddr *)&client->socket->s,
+		sizeof(client->socket->s));
 	if (error == -1) {
 		printf("Can not establish connection\n");
 		close_socket(client);

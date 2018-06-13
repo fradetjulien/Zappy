@@ -13,7 +13,8 @@ int		init_socket(t_client *client, const char *protocol)
 	if (client->protocol == NULL) {
 		return (-1);
 	}
-	client->socket->fd = socket(AF_INET, SOCK_STREAM, client->protocol->p_proto);
+	client->socket->fd = socket(AF_INET, SOCK_STREAM,
+				client->protocol->p_proto);
 	if (client->socket->fd == -1) {
 		return (-1);
 	}

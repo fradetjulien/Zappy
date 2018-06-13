@@ -9,9 +9,9 @@
 
 void		help_client(char *binary)
 {
-	printf("USAGE: %s -p port -n name -h machine\n"
-	       "\tport\tis the port number\n"
-	       "\tname\tis the name of the team\n"
-	       "\tmachine\tis the name of the machine; "
-	       "localhost by default\n", binary);
+	printf("USAGE: %s -p port -n name -h machine\n", binary);
+	printf("\tport\tis the port number\n");
+	printf("\tname\tis the name of the team\n");
+	printf("\tmachine\tis the name of the machine; ");
+	printf("localhost by default\n");
 }
