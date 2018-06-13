@@ -63,14 +63,37 @@ int				close_socket(t_client *client);
 int				connection_server(t_client *client);
 
 /* Handle Instruction */
-void				init_instructions(t_instructions *instructions,
-						  t_client *client, char *instruction);
+void				init_instructions(t_instructions *instructions);
 char				*print_instruction(char *instruction_received);
 char				*get_instruction(t_client *client);
 int				read_instruction(t_client *client);
 int				find_instruction(char *instruction);
 int				execute_instruction(t_client *client, char *instruction);
 int				send_instruction(t_client *client, char *instruction);
+
+/* Instructions */
+int				forward(t_client *client, char *instruction);
+int				right(t_client *client, char *instruction);
+int				left(t_client *client, char *instruction);
+int				look(t_client *client, char *instruction);
+int				inventory(t_client *client, char *instruction);
+int				bro(t_client *client, char *instruction);
+int				broadcast(t_client *client ,char *instruction);
+int				cmd_connect(t_client *client, char *instruction);
+int				cmd_fork(t_client *client, char *instruction);
+int				eject(t_client *client, char *instruction);
+int				take(t_client *client, char *instruction);
+int				set(t_client *client, char *instruction);
+int				incantation(t_client *client, char *instruction);
+int				map_size(t_client *client, char *instruction);
+int				content_tile(t_client *client, char *instruction);
+int				content_map(t_client *client, char *instruction);
+int				name_all_teams(t_client *client, char *instruction);
+int				player_pos(t_client *client, char *instruction);
+int				player_lvl(t_client *client, char *instruction);
+int				player_inventory(t_client *client, char *instruction);
+int				time_unit_request(t_client *client, char *instruction);
+int				time_unit_modif(t_client *client, char *instruction);
 
 /* Library */
 char				*get_next_line(const int);

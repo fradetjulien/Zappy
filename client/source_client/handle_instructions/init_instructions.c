@@ -16,8 +16,7 @@ void		following_init(t_instructions *instru)
 	instru->_instructions[21] = &time_unit_modif;
 }
 
-void		init_instructions(t_instructions *instru, t_client *client,
-				  char *instruction)
+void		init_instructions(t_instructions *instru)
 {
 	instru->_instructions[0] = &forward;
 	instru->_instructions[1] = &right;
@@ -25,8 +24,8 @@ void		init_instructions(t_instructions *instru, t_client *client,
 	instru->_instructions[3] = &look;
 	instru->_instructions[4] = &inventory;
 	instru->_instructions[5] = &broadcast;
-	instru->_instructions[6] = &connect;
-	instru->_instructions[7] = &fork;
+	instru->_instructions[6] = &cmd_connect;
+	instru->_instructions[7] = &cmd_fork;
 	instru->_instructions[8] = &eject;
 	instru->_instructions[10] = &take;
 	instru->_instructions[11] = &set;

@@ -27,11 +27,14 @@ SRC_CLIENT     =        source_client/handle_client/client.c 			\
 			source_client/handle_instructions/execute_instruction.c	\
 			source_client/handle_instructions/find_instruction.c	\
 			source_client/handle_instructions/init_instructions.c	\
-			source_client/handle_instructions/instructions.c	\
 			source_client/handle_instructions/read_instruction.c	\
 			source_client/handle_instructions/send_instruction.c	\
 			source_client/handle_instructions/get_instruction.c	\
+			source_client/handle_instructions/instructions.c	\
 			source_client/handle_instructions/instructions_2.c	\
+			source_client/handle_instructions/instructions_3.c	\
+			source_client/handle_instructions/instructions_4.c	\
+			source_client/handle_instructions/instructions_5.c	\
 			source_client/handle_instructions/print_instruction.c	\
 			source_client/library/get_next_line.c
 

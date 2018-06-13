@@ -33,7 +33,7 @@ void	init_realInstructions_two(char **realInstructions)
 	realInstructions[17] = "plv";
 	realInstructions[18] = "pin";
 	realInstructions[19] = "sgt";
-	realInstructions[20] = "sst T";
+	realInstructions[20] = "sst ";
 }
 
 int		find_instruction(char *instruction)
@@ -43,9 +43,10 @@ int		find_instruction(char *instruction)
 
 	init_realInstructions_one(realInstructions);
 	init_realInstructions_two(realInstructions);
-	while (position < 10 && (strcmp(instruction, realInstructions[position])) != 0)
+	while (position < 21 && (strncmp(instruction, realInstructions[position],
+					 strlen(realInstructions[position])) != 0))
 		position++;
-	if (position > 9)
+	if (position > 20)
 		return (-1);
 	return (position);
 }
