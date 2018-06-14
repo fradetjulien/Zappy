@@ -22,6 +22,7 @@ SRC_CLIENT     =        source_client/handle_client/client.c 			\
 			source_client/handle_socket/init_socket.c 		\
 			source_client/handle_arguments/is_hostname.c 		\
 			source_client/handle_arguments/is_port.c 		\
+			source_client/handle_arguments/is_welcome.c 		\
 			source_client/handle_arguments/is_writearguments.c 	\
 			source_client/handle_client/launch_client.c		\
 			source_client/handle_instructions/execute_instruction.c	\
@@ -36,7 +37,10 @@ SRC_CLIENT     =        source_client/handle_client/client.c 			\
 			source_client/handle_instructions/instructions_4.c	\
 			source_client/handle_instructions/instructions_5.c	\
 			source_client/handle_instructions/print_instruction.c	\
-			source_client/library/get_next_line.c
+			source_client/library/get_next_line.c			\
+			source_client/handle_server/contact_server.c		\
+			source_client/handle_server/remaining_places.c		\
+			source_client/handle_server/world_dimension.c
 
 
 OBJ_CLIENT     = $(SRC_CLIENT:.c=.o)

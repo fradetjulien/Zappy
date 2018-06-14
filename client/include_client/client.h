@@ -39,6 +39,8 @@ typedef struct			s_client
 	char			*host;
 	fd_set			*read;
 	t_socket		*socket;
+	int			abscissa;
+	int			orderly;
 }t_client;
 
 typedef struct			s_instructions
@@ -52,10 +54,16 @@ void				free_client(t_client client);
 void				help_client(char *binary);
 int				launch_client(t_client *client);
 
+/* Handle Server */
+int				contact_server(t_client *c, char *instruct_rec);
+int				remaining_places(char *instruction_received);
+int				world_dimension(t_client *c, char *instruction_received);
+
 /* Handle Arguments */
 int				is_writearguments(t_client *client, char **av);
 int				is_hostname(char *host);
 int				is_port(char *port);
+int				is_welcome(char *instruction);
 
 /* Handle Socket */
 int				init_socket(t_client *client, const char *p);
@@ -64,7 +72,7 @@ int				connection_server(t_client *client);
 
 /* Handle Instruction */
 void				init_instructions(t_instructions *instructions);
-char				*print_instruction(char *instruction_received);
+char				*print_instruction(char *instruction_received, int state);
 char				*get_instruction(t_client *client);
 int				read_instruction(t_client *client);
 int				find_instruction(char *instruction);
