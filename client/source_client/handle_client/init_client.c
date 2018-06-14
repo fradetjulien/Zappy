@@ -18,7 +18,6 @@ t_socket	*init_client(t_client *client)
 	client->orderly = 0;
 	client->team = NULL;
 	client->port = NULL;
-	client->read = NULL;
 	client->host = LOCALHOST;
 	return (client->socket);
 }

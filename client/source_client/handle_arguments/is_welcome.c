@@ -12,7 +12,7 @@ int		is_welcome(char *instruction)
 	if (instruction == NULL) {
 		return (-1);
 	}
-	else if (strcmp(instruction, "WELCOME\n") != 0) {
+	else if (strcmp(instruction, "WELCOME") != 0) {
 		return (-1);
 	}
 	else {

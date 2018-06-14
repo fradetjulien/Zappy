@@ -11,11 +11,9 @@ char		*print_instruction(char *instruction_received, int state)
 {
 	if (instruction_received != NULL && state == 1) {
 		printf("<-- %s\n", instruction_received);
-		free(instruction_received);
 	}
 	else if (instruction_received != NULL && state == 0) {
 		printf("--> %s\n", instruction_received);
-		free(instruction_received);
 	}
 	return (NULL);
 }
