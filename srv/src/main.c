@@ -7,6 +7,8 @@
 int main(int ac, char **av)
 {
 	(void)ac;
+	if (init_map() == -1)
+		return 84;
 	if (server(av) == -1)
 		return 84;
 	return 0;
