@@ -7,9 +7,9 @@
 int main(int ac, char **av)
 {
 	(void)ac;
-	if (init_map() == -1)
-		return 84;
-	if (server(av) == -1)
-		return 84;
-	return 0;
+        if (verification_args(av) == -1)
+                return (84);
+        if (loop_server(ac, av) == -1)
+                return 84;
+        return 0;
 }

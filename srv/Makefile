@@ -14,7 +14,12 @@ CFLAGS += -Wextra -Wall -I include/
 NAME_SERVER    = ../zappy_server
 
 SRC_SERVER     =        src/main.c \
-			src/init_serv.c
+			src/init_serv.c \
+			src/init_list_team.c \
+			src/init_zappy.c \
+			src/init_client.c \
+			src/ring_buffer.c \
+			src/handle_client.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

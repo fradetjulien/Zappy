@@ -9,9 +9,52 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "ring_buffer.h"
 
 # define HEIGHT 20
 # define WIDTH 20
+
+int     loop_server(int ac, char **av);
+int	verification_args(char **av);
+int	fill_port(char **av);
+int     fill_width(char **av);
+int     fill_height(char **av);
+int     fill_nb_players(int ac, char **av);
+
+typedef struct Client {
+	char *name_team;
+	int is_connected;
+	int socket;
+	int id;
+	rbuffer *rb;
+	struct Client *next;
+}client;
+
+typedef struct Team {
+	char *name_team;
+        int     nb_team;
+        struct Team *next;
+}team;
+
+typedef struct Server {
+        int fd;
+        fd_set  server;
+        int port;
+	int width;
+	int height;
+	int nb_player;
+        rbuffer *buffer;
+	client *client;
+        int     nbMax;
+}server;
+
+team    *add_list_team(char *name_team, team *list);
+void    show_list_team(team *list);
+team *fill_name_teams(int ac, char **av);
+client *add_client(client *list);
+void    init_client(client *, server *);
+void show_client(client *list);
+int     manage_cmd(server*, int fd);
 
 typedef struct		s_node_pos
 {
@@ -50,6 +93,5 @@ int	set_under_seven();
 int	my_random(int b);
 int	my_range_random(int a, int b);
 
-int     server(char **av);
 
 #endif /* SERVER_H_ */
