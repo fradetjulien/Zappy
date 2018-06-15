@@ -9,7 +9,7 @@
 
 char		*get_instruction(t_client *client)
 {
-	char	*instruction;
+	char	*instruction = NULL;
 
 	instruction = get_next_line(client->socket->fd);
 	if (instruction == NULL)
