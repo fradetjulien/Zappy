@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2018
 ** PSU_zappy_2017
 ** File description:
-** isWriteArguments.c
+** is_writearguments.c
 */
 
 #include "client.h"
 
-int		isWriteArguments(t_client *client, char **av)
+int		is_writearguments(t_client *client, char **av)
 {
 	if ((strcmp(av[0], "./zappy_ai") != 0) ||
-	    (strcmp(av[1], "-p") != 0) ||
-	    (strcmp(av[3], "-n") != 0) ||
-	    (strcmp(av[5], "-h") != 0)) {
+	(strcmp(av[1], "-p") != 0) ||
+	(strcmp(av[3], "-n") != 0) ||
+	(strcmp(av[5], "-h") != 0)) {
 		return (-1);
 	}
-	else if (isHostname(av[6]) != 0 || isPort(av[2]) != 0) {
+	else if (is_hostname(av[6]) != 0 || is_port(av[2]) != 0) {
 		return (-1);
 	}
 	else {

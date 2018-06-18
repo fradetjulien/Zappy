@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2018
 ** PSU_zappy_2017
 ** File description:
-** isHostname.c
+** isPort.c
 */
 
 #include "client.h"
 
-int		isHostname(char	*host)
+int		is_port(char *port)
 {
 	int	i = 0;
 
-	if (host == NULL) {
+	if (port == NULL) {
 		return (-1);
 	}
-	while (host && host[i] != '\0') {
-		if ((host[i] < 48 || host[i] > 57) && host[i] != '.') {
+	while (port && port[i] != '\0') {
+		if (port[i] < 48 || port[i] > 57) {
 			return (-1);
 		}
 		i++;

@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2018
+## PSU_zappy_2017
+## File description:
+## Makefile
+##
+
 CC      = gcc -g
 
 RM      = rm -f
@@ -6,17 +13,35 @@ CFLAGS += -Wextra -Wall -I include_client/
 
 NAME_CLIENT    = ../zappy_ai
 
-SRC_CLIENT     =        source_client/client.c \
-			source_client/close_socket.c \
-			source_client/connection_serveur.c \
-			source_client/free_client.c \
-			source_client/help_client.c \
-			source_client/init_client.c \
-			source_client/init_socket.c \
-			source_client/isHostname.c \
-			source_client/isPort.c \
-			source_client/isWriteArguments.c \
-			source_client/launch_client.c
+SRC_CLIENT     =        source_client/handle_client/client.c 			\
+			source_client/handle_socket/close_socket.c 		\
+			source_client/handle_socket/connection_server.c 	\
+			source_client/handle_client/free_client.c 		\
+			source_client/handle_client/help_client.c 		\
+			source_client/handle_client/init_client.c 		\
+			source_client/handle_socket/init_socket.c 		\
+			source_client/handle_arguments/is_hostname.c 		\
+			source_client/handle_arguments/is_port.c 		\
+			source_client/handle_arguments/is_welcome.c 		\
+			source_client/handle_arguments/is_writearguments.c 	\
+			source_client/handle_client/launch_client.c		\
+			source_client/handle_instructions/execute_instruction.c	\
+			source_client/handle_instructions/find_instruction.c	\
+			source_client/handle_instructions/init_instructions.c	\
+			source_client/handle_instructions/read_instruction.c	\
+			source_client/handle_instructions/send_instruction.c	\
+			source_client/handle_instructions/get_instruction.c	\
+			source_client/handle_instructions/instructions.c	\
+			source_client/handle_instructions/instructions_2.c	\
+			source_client/handle_instructions/instructions_3.c	\
+			source_client/handle_instructions/instructions_4.c	\
+			source_client/handle_instructions/instructions_5.c	\
+			source_client/handle_instructions/print_instruction.c	\
+			source_client/library/get_next_line.c			\
+			source_client/handle_server/contact_server.c		\
+			source_client/handle_server/remaining_places.c		\
+			source_client/handle_server/world_dimension.c
+
 
 OBJ_CLIENT     = $(SRC_CLIENT:.c=.o)
 
