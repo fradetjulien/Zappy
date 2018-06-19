@@ -16,6 +16,10 @@ int		world_dimension(t_client *client, char *instruct_received)
 	while (instruct_received[++i] != ' ' && instruct_received);
 	tmp = &instruct_received[i];
 	client->orderly = atoi(tmp);
-	printf("%d %d\n", client->abscissa, client->orderly);
+	if (client->abscissa < 1 ||
+	client->orderly < 1)
+		return (-1);
+	else
+		printf("%d %d\n", client->abscissa, client->orderly);
 	return (0);
 }

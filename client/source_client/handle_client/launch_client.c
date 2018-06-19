@@ -18,6 +18,8 @@ int			which_step(t_client *client, char *instructReceived)
 	if (is_AlreadySend == 1) {
 		if (remaining_places(instructReceived) == 0)
 			is_AlreadySend = 2;
+		else
+			return (-1);
 	}
 	if (is_AlreadySend == 0 && is_welcome(instructReceived) == 0) {
 		if (contact_server(client, instructReceived) == 0)
