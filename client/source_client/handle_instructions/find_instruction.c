@@ -44,7 +44,8 @@ int		find_instruction(char *instruction)
 	init_realinstructions(realinstructions);
 	init_realinstructions2(realinstructions);
 	while (position < 21 && (strncmp(instruction,
-	realinstructions[position], strlen(realinstructions[position])) != 0))
+		realinstructions[position],
+		strlen(realinstructions[position])) != 0))
 		position++;
 	if (position > 20)
 		return (-1);

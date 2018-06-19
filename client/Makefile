@@ -13,34 +13,34 @@ CFLAGS += -Wextra -Wall -I include_client/
 
 NAME_CLIENT    = ../zappy_ai
 
-SRC_CLIENT     =        source_client/handle_client/client.c 			\
-			source_client/handle_socket/close_socket.c 		\
-			source_client/handle_socket/connection_server.c 	\
-			source_client/handle_client/free_client.c 		\
-			source_client/handle_client/help_client.c 		\
-			source_client/handle_client/init_client.c 		\
-			source_client/handle_socket/init_socket.c 		\
-			source_client/handle_arguments/is_hostname.c 		\
-			source_client/handle_arguments/is_port.c 		\
-			source_client/handle_arguments/is_welcome.c 		\
-			source_client/handle_arguments/is_writearguments.c 	\
-			source_client/handle_client/launch_client.c		\
-			source_client/handle_instructions/execute_instruction.c	\
-			source_client/handle_instructions/find_instruction.c	\
-			source_client/handle_instructions/init_instructions.c	\
-			source_client/handle_instructions/read_instruction.c	\
-			source_client/handle_instructions/send_instruction.c	\
-			source_client/handle_instructions/get_instruction.c	\
-			source_client/handle_instructions/instructions.c	\
-			source_client/handle_instructions/instructions_2.c	\
-			source_client/handle_instructions/instructions_3.c	\
-			source_client/handle_instructions/instructions_4.c	\
-			source_client/handle_instructions/instructions_5.c	\
-			source_client/handle_instructions/print_instruction.c	\
-			source_client/library/get_next_line.c			\
-			source_client/handle_server/contact_server.c		\
-			source_client/handle_server/remaining_places.c		\
-			source_client/handle_server/world_dimension.c
+SRC_CLIENT     =source_client/handle_client/client.c 			\
+		source_client/handle_socket/close_socket.c 		\
+		source_client/handle_socket/connection_server.c 	\
+		source_client/handle_client/free_client.c 		\
+		source_client/handle_client/help_client.c 		\
+		source_client/handle_client/init_client.c 		\
+		source_client/handle_socket/init_socket.c 		\
+		source_client/handle_arguments/is_hostname.c 		\
+		source_client/handle_arguments/is_port.c 		\
+		source_client/handle_arguments/is_welcome.c 		\
+		source_client/handle_arguments/is_writearguments.c 	\
+		source_client/handle_client/launch_client.c		\
+		source_client/handle_instructions/execute_instruction.c	\
+		source_client/handle_instructions/find_instruction.c	\
+		source_client/handle_instructions/init_instructions.c	\
+		source_client/handle_instructions/read_instruction.c	\
+		source_client/handle_instructions/send_instruction.c	\
+		source_client/handle_instructions/get_instruction.c	\
+		source_client/handle_instructions/instructions.c	\
+		source_client/handle_instructions/instructions_2.c	\
+		source_client/handle_instructions/instructions_3.c	\
+		source_client/handle_instructions/instructions_4.c	\
+		source_client/handle_instructions/instructions_5.c	\
+		source_client/handle_instructions/print_instruction.c	\
+		source_client/library/get_next_line.c			\
+		source_client/handle_server/contact_server.c		\
+		source_client/handle_server/remaining_places.c		\
+		source_client/handle_server/world_dimension.c
 
 
 OBJ_CLIENT     = $(SRC_CLIENT:.c=.o)
@@ -57,9 +57,9 @@ clean:
 fclean:
 	$(RM) $(OBJ_CLIENT)
 	$(RM) $(NAME_CLIENT)
-	@printf "\n[\33[1;32mCLEAN\033[0;m] Binary : myftp | OBJ_CLIENT : $(OBJ_CLIENT)\n\n"
+	@printf "\n[\33[1;32mCLEAN\033[0;m] Binary : myftp |"
+		" OBJ_CLIENT : $(OBJ_CLIENT)\n\n"
 
 re: fclean all
 
 .PHONY: all clean fclean re server client
-

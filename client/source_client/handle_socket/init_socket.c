@@ -14,7 +14,7 @@ int		init_socket(t_client *client, const char *protocol)
 		return (-1);
 	}
 	client->socket->fd = socket(AF_INET, SOCK_STREAM,
-				client->protocol->p_proto);
+	client->protocol->p_proto);
 	if (client->socket->fd == -1) {
 		return (-1);
 	}
