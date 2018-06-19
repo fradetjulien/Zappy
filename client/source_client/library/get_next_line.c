@@ -7,6 +7,17 @@
 
 #include "client.h"
 
+void			charact(char c, char *str)
+{
+	if (c == '\n') {
+		*str = '\0';
+	}
+	else {
+		*str = c;
+		*(str + 1) = 0;
+	}
+}
+
 int			select_c(const int fd, char *str)
 {
 	static char	buffer[READ_SIZE];
@@ -23,12 +34,7 @@ int			select_c(const int fd, char *str)
 		i = -1;
 	}
 	else {
-		if (buffer[i] == '\n')
-			*str = '\0';
-		else {
-			*str = buffer[i];
-			*(str + 1) = 0;
-		}
+		charact(buffer[i], str);
 		i++;
 	}
 	return (nbr);
