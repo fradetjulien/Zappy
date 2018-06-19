@@ -17,9 +17,27 @@ SRC_SERVER     =        src/main.c \
 			src/init_serv.c \
 			src/init_list_team.c \
 			src/init_zappy.c \
-			src/init_client.c \
 			src/ring_buffer.c \
-			src/handle_client.c
+			src/handle_client.c \
+			src/command.c \
+			src/commands/bct.c \
+			src/commands/broadcast.c \
+			src/commands/connect_nbr.c \
+			src/commands/eject.c \
+			src/commands/fork.c \
+			src/commands/incantation.c \
+			src/commands/inventory.c \
+			src/commands/look.c \
+			src/commands/map_size.c \
+			src/commands/mct.c \
+			src/commands/move.c \
+			src/commands/pin.c \
+			src/commands/plv.c \
+			src/commands/ppo.c \
+			src/commands/sgt.c \
+			src/commands/sst.c \
+			src/commands/take.c \
+			src/commands/tna.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

@@ -9,18 +9,8 @@
 
 char	*fill_team(char *name_team)
 {
-	size_t i = 0;
-	char	*team;
+	char	*team = strdup(name_team);
 	
-	while (!(name_team[i] >= 48 && name_team[i] <= 57))
-                i++;
-	team = malloc(sizeof(char) * i);
-	i = 0;
-	while (!(name_team[i] >= 48 && name_team[i] <= 57)) {
-		team[i] = name_team[i];
-                i++;
-	}
-	team[i] = 0;
 	return (team);
 }
 
@@ -44,7 +34,7 @@ int	number_team(char *name_team)
 	return (atoi(nb_of_team));
 }
 
-team	*add_list_team(char *name_team, team *list)
+team	*add_list_team(char *name_team, team *list, int ac, char **av)
 {
 	team        *new;
 	team        *tmp;
@@ -52,7 +42,7 @@ team	*add_list_team(char *name_team, team *list)
 	if ((new = malloc(sizeof(team))) == NULL)
 		return (NULL);
 	new->name_team = fill_team(name_team);
-	new->nb_team = number_team(name_team);
+	new->nb_player = fill_nb_players(ac, av);
 	new->next = NULL;
 	if (list == NULL)
 		return (new);
@@ -71,7 +61,7 @@ void	show_list_team(team *list)
 
 	while (tmp) {
 		printf("name of team = %s\n", tmp->name_team);
-		printf("id team = %d\n", tmp->nb_team);
+		printf("id team = %d\n", tmp->nb_player);
 		tmp = tmp->next;
 	}
 }
