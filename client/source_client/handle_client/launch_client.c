@@ -7,27 +7,36 @@
 
 #include "client.h"
 
-int			check_fds(t_client *client)
+int			which_step(t_client *client, char *instructReceived)
 {
 	static int	is_AlreadySend = 0;
+
+	if (is_AlreadySend == 2) {
+		if (world_dimension(client, instructReceived) == 0)
+			is_AlreadySend = 3;
+	}
+	if (is_AlreadySend == 1) {
+		if (remaining_places(instructReceived) == 0)
+			is_AlreadySend = 2;
+	}
+	if (is_AlreadySend == 0 && is_welcome(instructReceived) == 0) {
+		if (contact_server(client, instructReceived) == 0)
+			is_AlreadySend = 1;
+		else
+			return (-1);
+	}
+	return (0);
+}
+
+int			check_fds(t_client *client)
+{
 	char		*instructReceived = NULL;
 	int		error = 0;
 
 	for (int i = 0; i < (client->socket->fd + 1); i++) {
 		if (FD_ISSET(client->socket->fd, &client->read)) {
 			instructReceived = get_instruction(client);
-			if (is_AlreadySend == 2) {
-				if (world_dimension(client, instructReceived) == 0)
-					is_AlreadySend = 3;
-			}
-			if (is_AlreadySend == 1) {
-				if (remaining_places(instructReceived) == 0)
-					is_AlreadySend = 2;
-			}
-			if (is_AlreadySend == 0 && is_welcome(instructReceived) == 0) {
-				if (contact_server(client, instructReceived) == 0)
-					is_AlreadySend = 1;
-			}
+			error = which_step(client, instructReceived);
 			free(instructReceived);
 			instructReceived = NULL;
 		}

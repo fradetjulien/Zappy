@@ -57,7 +57,7 @@ int				launch_client(t_client *client);
 /* Handle Server */
 int				contact_server(t_client *c, char *instruct_rec);
 int				remaining_places(char *instruction_received);
-int				world_dimension(t_client *c, char *instruction_received);
+int				world_dimension(t_client *c, char *instruct);
 
 /* Handle Arguments */
 int				is_writearguments(t_client *client, char **av);
@@ -72,7 +72,7 @@ int				connection_server(t_client *client);
 
 /* Handle Instruction */
 void				init_instructions(t_instructions *instructions);
-char				*print_instruction(char *instruction_received, int state);
+char				*print_instruction(char *instruct, int state);
 char				*get_instruction(t_client *client);
 int				read_instruction(t_client *client);
 int				find_instruction(char *instruction);
