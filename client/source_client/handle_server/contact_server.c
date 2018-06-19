@@ -17,8 +17,5 @@ int		contact_server(t_client *client, char *instructReceived)
 	}
 	instructReceived = print_instruction(instructReceived, 1);
 	instructReceived = print_instruction(client->team, 0);
-	if (instructReceived == NULL) {
-		return (-1);
-	}
 	return (0);
 }
