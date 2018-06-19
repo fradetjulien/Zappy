@@ -9,11 +9,6 @@
 
 int		send_instruction(t_client *client, char *instruction)
 {
-	int	error = 0;
-
-	error = write(client->socket->fd, instruction, strlen(instruction));
-	if (error == -1) {
-		return (-1);
-	}
+	dprintf(client->socket->fd, "%s\n", instruction);
 	return (0);
 }
