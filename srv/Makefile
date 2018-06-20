@@ -42,7 +42,8 @@ SRC_SERVER     =        src/main.c \
 			src/set_rsrc.c \
 			src/set_rsrcbis.c \
 			src/utils.c \
-			src/my_str_to_wordtab.c
+			src/my_str_to_wordtab.c \
+			src/inventory.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

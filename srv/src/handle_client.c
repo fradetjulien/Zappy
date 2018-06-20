@@ -11,6 +11,7 @@
 int first_cmd(char *buffer, int fd, server *server, int i)
 {
 	team *tmp = server->team;
+
 	while (tmp) {
 		if (strncmp(tmp->name_team, buffer,
 			strlen(tmp->name_team)) == 0) {
@@ -33,29 +34,30 @@ void	manage_client(server *server, fd_set rdfs)
 	char **params;
 	int r;
 
-    for (i = 0; i < server->actual; i++) {
-        if (FD_ISSET(server->client[i].fd, &rdfs)) {
-                memset(buf, 0, 4096);
-				r = read(server->client[i].fd, buf, 4096);
-				if (r == 0) {
-					printf("Client disconnected : %d\n", server->client[i].fd);
-					close(server->client[i].fd);
-					server->actual--;
-				}
-				if (server->client[i].is_connected == 0) {
-					if (first_cmd(buf, server->client[i].fd, server, i) == 1)
+	for (i = 0; i < server->actual; i++) {
+		if (FD_ISSET(server->client[i].fd, &rdfs)) {
+			memset(buf, 0, 4096);
+			r = read(server->client[i].fd, buf, 4096);
+			if (r == 0) {
+				printf("Client disconnected : %d\n", server->client[i].fd);
+				close(server->client[i].fd);
+				server->actual--;
+			}
+			if (server->client[i].is_connected == 0) {
+				if (first_cmd(buf, server->client[i].fd, server, i) == 1) {
 					server->client[i].is_connected = 1;
 				}
-				if (server->client[i].is_connected == 1) {
-					for (int cmd = 0; cmd < 20; cmd++) {
-						if (strncmp(server->cmd[cmd], buf,
-							strlen(server->cmd[cmd])) == 0) {
-                            params = str_to_wordtab(buf, ' ');
-                            server->command[cmd](server, i, params);
-						}
+			}
+			if (server->client[i].is_connected == 1) {
+				for (int cmd = 0; cmd < 20; cmd++) {
+					if (strncmp(server->cmd[cmd], buf,
+						    strlen(server->cmd[cmd])) == 0) {
+						params = str_to_wordtab(buf, ' ');
+						server->command[cmd](server, i, params);
+					}
 				}
 			}
-        	break;
-        }
-    }
+			break;
+		}
+	}
 }

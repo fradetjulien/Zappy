@@ -50,6 +50,16 @@ typedef struct			s_map
 	struct s_map		*next;
 }			t_map;
 
+typedef struct s_inventory {
+    int		nb_linemate;
+    int		nb_deraumere;
+    int		nb_sibur;
+    int		nb_mendiane;
+    int		nb_phiras;
+    int		nb_thystame;
+    int		nb_food;
+}t_inventory;
+
 typedef struct Client {
 	int fd;
 	char *name_team;
@@ -59,6 +69,8 @@ typedef struct Client {
 	int posX;
 	int posY;
 	int orient;
+	t_inventory *inventory;
+	int time;
 }client;
 
 typedef struct Team {
@@ -108,6 +120,7 @@ void sgt(server *server, int i, char **params);
 void take(server *server, int i, char **params);
 void tna(server *server, int i, char **params);
 //
+
 /*map*/
 t_map	*init_pos(t_map *map, int xx, int yy);
 t_map	*init_rsrc(t_map *map);
@@ -133,5 +146,6 @@ void	manage_client(server *server, fd_set rdfs);
 void init_command(server *server);
 void init_function_command(server *server);
 char	**str_to_wordtab(char *str, char delimitor);
+t_inventory *init_inventory();
 
 #endif /* SERVER_H_ */
