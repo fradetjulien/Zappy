@@ -1,6 +1,11 @@
 #include "server.h"
 
-void tna(server *server, int i)
+void tna(server *server, int i, char UNUSED **params)
 {
-    dprintf(server->client[i].fd, "Tna\n");
+    team *tmp = server->team;
+
+    while (tmp) {
+        dprintf(server->client[i].fd, "tna %s\n", tmp->name_team);
+        tmp = tmp->next;
+    }
 }

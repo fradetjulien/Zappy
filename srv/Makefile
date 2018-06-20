@@ -37,7 +37,12 @@ SRC_SERVER     =        src/main.c \
 			src/commands/sgt.c \
 			src/commands/sst.c \
 			src/commands/take.c \
-			src/commands/tna.c
+			src/commands/tna.c \
+			src/init_map.c \
+			src/set_rsrc.c \
+			src/set_rsrcbis.c \
+			src/utils.c \
+			src/my_str_to_wordtab.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

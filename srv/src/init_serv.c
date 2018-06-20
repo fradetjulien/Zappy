@@ -39,6 +39,7 @@ void init_server(server *server, char **av, int ac)
 	server->actual = 0;
 	init_command(server);
 	init_function_command(server);
+	server->map = init_map(server);
 }
 
 void	socket_client(server *server, fd_set *rdfs)
