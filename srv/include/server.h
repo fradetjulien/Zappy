@@ -11,10 +11,6 @@
 #include <arpa/inet.h>
 #include "ring_buffer.h"
 
-#define NORTH 0
-#define EAST 1
-#define WEST 2
-#define SOUTH 3
 #define UNUSED __attribute__((__unused__))
 
 int     loop_server(int ac, char **av);
@@ -25,6 +21,12 @@ int     fill_height(char **av);
 int     fill_nb_players(int ac, char **av);
 int	fill_max_client(int ac, char **av);
 
+enum ORIENT {
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH
+};
 
 typedef struct		s_node_pos
 {
@@ -114,6 +116,7 @@ void mct(server *server, int i, char **params);
 void forward(server *server, int i, char **params);
 void left(server *server, int i, char **params);
 void right(server *server, int i, char **params);
+void pdi(server *server, int UNUSED i, char UNUSED **params);
 void pin(server *server, int i, char **params);
 void plv(server *server, int i, char **params);
 void sgt(server *server, int i, char **params);

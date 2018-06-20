@@ -22,7 +22,8 @@ void init_command(server *server)
     server->cmd[17] = "pin";
     server->cmd[18] = "sgt";
     server->cmd[19] = "sst";
-    server->cmd[20] = NULL;
+    server->cmd[20] = "pdi";
+    server->cmd[21] = NULL;
 }
 
 void init_function_command(server *server)
@@ -47,5 +48,6 @@ void init_function_command(server *server)
     server->command[17] = &pin;
     server->command[18] = &sgt;
     server->command[19] = &sst;
-    server->command[20] = NULL;
+    server->command[20] = &pdi;
+    server->command[21] = NULL;
 }

@@ -31,6 +31,7 @@ SRC_SERVER     =        src/main.c \
 			src/commands/map_size.c \
 			src/commands/mct.c \
 			src/commands/move.c \
+			src/commands/pdi.c \
 			src/commands/pin.c \
 			src/commands/plv.c \
 			src/commands/ppo.c \

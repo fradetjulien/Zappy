@@ -2,7 +2,7 @@
 
 int	create_socket(int port)
 {
-	struct sockaddr_in s_in;
+	    struct sockaddr_in s_in;
         struct protoent *pe = getprotobyname("TCP");
 
         s_in.sin_family = AF_INET;
