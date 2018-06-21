@@ -31,13 +31,20 @@ SRC_SERVER     =        src/main.c \
 			src/commands/map_size.c \
 			src/commands/mct.c \
 			src/commands/move.c \
+			src/commands/pdi.c \
 			src/commands/pin.c \
 			src/commands/plv.c \
 			src/commands/ppo.c \
 			src/commands/sgt.c \
 			src/commands/sst.c \
 			src/commands/take.c \
-			src/commands/tna.c
+			src/commands/tna.c \
+			src/init_map.c \
+			src/set_rsrc.c \
+			src/set_rsrcbis.c \
+			src/utils.c \
+			src/my_str_to_wordtab.c \
+			src/inventory.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

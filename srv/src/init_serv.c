@@ -2,7 +2,7 @@
 
 int	create_socket(int port)
 {
-	struct sockaddr_in s_in;
+	    struct sockaddr_in s_in;
         struct protoent *pe = getprotobyname("TCP");
 
         s_in.sin_family = AF_INET;
@@ -39,6 +39,7 @@ void init_server(server *server, char **av, int ac)
 	server->actual = 0;
 	init_command(server);
 	init_function_command(server);
+	server->map = init_map(server);
 }
 
 void	socket_client(server *server, fd_set *rdfs)
@@ -49,10 +50,12 @@ void	socket_client(server *server, fd_set *rdfs)
 	(unsigned int *)&sinsize);
     server->fd_max = csock > server->fd_max ? csock : server->fd_max;
     FD_SET(csock, rdfs);
-	client c = {csock, NULL, 0, server->actual, 1,
-	rand() % server->width, rand() % server->height, NORTH};
+	client c = {csock, NULL, 0, server->nb_player, 1,
+	rand() % server->width, rand() % server->height, NORTH, NULL, 1260};
+    c.inventory = init_inventory();
 	server->client[server->actual] = c;
 	server->actual++;
+	server->nb_player++;
 	dprintf(csock, "WELCOME\n");
 }
 
