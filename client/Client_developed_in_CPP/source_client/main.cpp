@@ -5,15 +5,19 @@
 // main.cpp
 //
 
-#include "Client.hpp"
+#include "../include_client/client.hpp"
+#include "../include_client/exception.hpp"
 
 int		main(int ac, char **av)
 {
-	Client	newClient(ac, av);
-
-	if (connectionServer() == -1)
-		return (-1);
-	if (launchClient() == -1)
-		return (-1);
+    try {
+        Client	newClient(ac, av);
+        newClient.connectionServer();
+        newClient.launchClient();
+    }
+    catch (const MyError &e) {
+        std::cerr << e.what() << std::endl;
+        return (84);
+    }
 	return (0);
 }

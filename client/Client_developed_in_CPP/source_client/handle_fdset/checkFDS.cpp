@@ -5,12 +5,13 @@
 // checkFDS.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
-void			whichStep()
+void			Client::whichStep()
 {
 	static int	isAlreadySend = 0;
 
+	std::cout << "received : " << _answerReceived << std::endl;
 	if (isAlreadySend == 2) {
 		if (worldDimension() == 0)
 			isAlreadySend = 3;
@@ -27,10 +28,9 @@ void			whichStep()
 
 int			Client::checkFDS()
 {
-	for (int i = 0; i < (_socket->fd + 1); i++) {
-		if (FD_ISSET(_socket->fd, &_read)) {
-			if (getInstruction() == -1)
-				return (-1);
+	for (int i = 0; i < (_fd + 1); i++) {
+		if (FD_ISSET(_fd, &_read)) {
+			getInstruction();
 			whichStep();
 		}
 	}

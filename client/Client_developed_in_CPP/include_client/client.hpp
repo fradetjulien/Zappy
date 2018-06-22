@@ -10,13 +10,13 @@
 
 #include <iostream>
 #include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include "Socket.hpp"
+#include "socket.hpp"
 
 # define LOCALHOST	"127.0.0.1"
 
@@ -26,12 +26,14 @@ private:
 	struct protoent		*_protocol;
 	std::string		_port;
 	std::string		_team;
-	std::string		_host;
 	std::string		_answerReceived;
 	int			_abscissa;
 	int			_orderly;
+	std::string		_host;
 	fd_set			_read;
-	Socket			*_socket;
+    int			_fd;
+    struct sockaddr_in	_s;
+    socklen_t		_len;
 public:
 
 /* Constructor & Destructor */
@@ -46,7 +48,7 @@ public:
 	int	isHostname(char *host);
 	int	isPort(char *port);
 	int	isWelcome();
-	void	helpClient(char *binary);
+	void	helpClient();
 
 /* Handle Socket */
 	int	connectionServer();
@@ -54,8 +56,9 @@ public:
 	int	closeSocket();
 
 /* Handle FD_Set */
+    void whichStep();
 	int	checkFDS();
-	void	initFDS(int fd, fd_set *read, struct timeval *time);
+	void	initFDS(fd_set *read, struct timeval *time);
 
 /* Handle Server */
 	void	contactServer();
@@ -65,7 +68,7 @@ public:
 /* Handle Instruction */
 	int	getInstruction();
 	void	sendInstruction();
-	void	printInstruction();
+	void	printInstruction(const char *);
 
 };
 

@@ -5,18 +5,17 @@
 // isWelcome.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
 int		Client::isWelcome()
 {
-	if (_answerReceived == nullptr) {
+	if (_answerReceived.empty()) {
 		return (-1);
 	}
-	else if (strcmp(_answerReceived, "WELCOME") != 0) {
+	else if (_answerReceived == "WELCOME") {
 		return (-1);
 	}
 	else {
 		return (0);
 	}
-	return (-1);
 }

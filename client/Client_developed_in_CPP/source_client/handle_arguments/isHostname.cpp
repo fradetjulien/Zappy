@@ -5,13 +5,13 @@
 // isHostname.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
 int		Client::isHostname(char *host)
 {
 	int	i = 0;
 
-	if (host == NULL) {
+	if (host == nullptr) {
 		return (-1);
 	}
 	while (host && host[i] != '\0') {

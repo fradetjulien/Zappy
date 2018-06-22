@@ -5,12 +5,18 @@
 // getInstruction.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
+#include "../../include_client/exception.hpp"
 
 int		Client::getInstruction()
 {
-	getline(_socket->fd, _answerReceived);
-	if (_answerReceived == nullptr)
-		return (-1);
+	FILE	*fd = fdopen(_fd, "r");
+	std::size_t len = 0;
+	char *tmp = nullptr;
+
+	getline(&tmp, &len, fd);
+	_answerReceived.assign(tmp);
+	if (_answerReceived.empty())
+		throw MyError("la");
 	return (0);
 }

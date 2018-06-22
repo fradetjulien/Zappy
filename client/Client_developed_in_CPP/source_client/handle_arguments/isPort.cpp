@@ -5,13 +5,13 @@
 // isPort.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
 int		Client::isPort(char *port)
 {
 	int	i = 0;
 
-	if (port == NULL) {
+	if (port == nullptr) {
 		return (-1);
 	}
 	while (port && port[i] != '\0') {
