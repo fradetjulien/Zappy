@@ -37,6 +37,7 @@ typedef struct			s_client
 	char			*port;
 	char			*team;
 	char			*host;
+	char			*answerReceived;
 	fd_set			read;
 	t_socket		*socket;
 	int			abscissa;

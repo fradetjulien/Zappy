@@ -24,6 +24,8 @@ void			which_step(t_client *client, char *instructReceived)
 			is_AlreadySend = 1;
 		}
 	}
+	else if (is_AlreadySend == 3)
+		client->answerReceived = strdup(instructReceived);
 }
 
 int			check_fds(t_client *client)
