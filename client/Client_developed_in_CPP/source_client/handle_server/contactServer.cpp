@@ -5,11 +5,11 @@
 // contactServer.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
 void		Client::contactServer()
 {
-	sendInstruction(_team);
-	printInstruction(_answerReceived);
-	printInstruction(_team);
+	sendInstruction();
+	printInstruction(_answerReceived.c_str());
+	printInstruction(_team.c_str());
 }

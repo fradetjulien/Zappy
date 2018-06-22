@@ -5,9 +5,10 @@
 // printInstruction.cpp
 //
 
-#include "Client.hpp"
 
-void		Client::printInstruction(char *instruction)
+#include "../../include_client/client.hpp"
+
+void		Client::printInstruction(const char *instruction)
 {
 	dprintf(1, "%s\n", instruction);
 }

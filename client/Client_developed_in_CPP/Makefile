@@ -9,7 +9,7 @@ CC      = g++ -g
 
 RM      = rm -f
 
-CFLAGS += -Wextra -Wall -I include_client/
+CPPFLAGS += -Wextra -Wall -I ../../include_client
 
 NAME_CLIENT    = ../zappy_ai
 
@@ -28,16 +28,16 @@ SRC_CLIENT     =source_client/handle_client/client.cpp 			\
 		source_client/handle_server/contactServer.cpp		\
 		source_client/handle_server/remainingPlaces.cpp		\
 		source_client/handle_server/worldDimension.cpp		\
-		source_client/handle_socket/socket.cpp 			\
 		source_client/handle_socket/initSocket.cpp 		\
 		source_client/handle_socket/closeSocket.cpp 		\
 		source_client/handle_socket/connectionServer.cpp	\
+		source_client/exception.cpp \
 		source_client/main.cpp
 
 OBJ_CLIENT     = $(SRC_CLIENT:.cpp=.o)
 
 $(NAME_CLIENT): $(OBJ_CLIENT)
-	$(CC) -o $(NAME_CLIENT) $(CFLAGS) $(OBJ_CLIENT)
+	$(CC) -o $(NAME_CLIENT) $(CPPFLAGS) $(OBJ_CLIENT)
 	@printf "\n[\33[1;32mOK\033[0;m] Binary : $(NAME_CLIENT)\n"
 
 all: $(NAME_CLIENT)

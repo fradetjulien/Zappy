@@ -5,13 +5,14 @@
 // remainingPlaces.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
+#include "../../include_client/exception.hpp"
 
 int		Client::remainingPlaces()
 {
-	if (atoi(_answerReceived) >= 1) {
-		printInstruction();
+	if (atoi(_answerReceived.c_str()) >= 1) {
+		printInstruction(_answerReceived.c_str());
 		return (0);
 	}
-	return (-1);
+	throw MyError("ici alors");
 }

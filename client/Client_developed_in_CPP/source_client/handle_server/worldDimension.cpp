@@ -5,18 +5,19 @@
 // worldDimension.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
+#include "../../include_client/exception.hpp"
 
 int			Client::worldDimension()
 {
 	int		i = -1;
 	
-	_abscissa = atoi(_answerReceived);
-	while (_answerReceived && answerReceived[++i] != ' ');
-	std::string	tmp = new &_answerReceived[i];
-	_orderly = atoi(tmp);
+	_abscissa = atoi(_answerReceived.c_str());
+	while (!_answerReceived.empty() && _answerReceived[++i] != ' ');
+	std::string	tmp = &_answerReceived[i];
+	_orderly = atoi(tmp.c_str());
 	if (_abscissa < 1 || _orderly < 1)
-		return (-1);
+		throw MyError("ici");
 	else
 		dprintf(1, "%d %d\n", _abscissa, _orderly);
 	return (0);

@@ -5,9 +5,9 @@
 // sendInstruction.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
 
 void		Client::sendInstruction()
 {
-	dprintf(_socket->fd, "%s\n", _answerReceived);
+	dprintf(_fd, "%s\n", _answerReceived.c_str());
 }

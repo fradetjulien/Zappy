@@ -5,13 +5,14 @@
 // closeSocket.cpp
 //
 
-#include "Client.hpp"
+#include "../../include_client/client.hpp"
+#include "../../include_client/exception.hpp"
 
 int		Client::closeSocket()
 {
-	if (close(_socket->fd) == -1) {
-		return (-1);
+	if (close(_fd) == -1) {
+		throw MyError("");
 	}
-	_socket->fd = -1;
+	_fd = -1;
 	return (0);
 }
