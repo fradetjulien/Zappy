@@ -12,7 +12,7 @@ int		read_instruction(t_client *client)
 	int	error = 0;
 	char	instruction[255];
 
-	error = read(0, instruction, 255);
+	error = read(client->socket->fd, instruction, 255);
 	if (error == -1) {
 		printf("Failure to read the instruction\n");
 		return (-1);
