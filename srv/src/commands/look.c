@@ -1,16 +1,6 @@
-#include "server.h"
+#include "../../include/server.h"
 
-void	west(server *server, int i)
-{
-	
-}
-
-void	east(server *server, int i)
-{
-	
-}
-
-int	get_nb_player(server *srever, int x, int y)
+int	get_nb_player(server *server, int x, int y)
 {
 	int	i = -1;
 	int	j = 0;
@@ -22,155 +12,204 @@ int	get_nb_player(server *srever, int x, int y)
 	return j;
 }
 
-int	get_nb_linemate(server *server, int x, int y)
+
+char **create_tab_ressources(void)
 {
-	while (server->map) {
-		if (server->map->node_pos->x == x && server->map->node_pos->y == y)
-			return server->map->rsrc->nb_linemate;
-		server->map = server->map->next;
+	char **tmp= malloc(sizeof(char *) * 8);
+
+	if (tmp == NULL)
+		return (NULL);
+	tmp[0] = strdup("player");
+	tmp[1] = strdup("linemate");
+	tmp[2] = strdup("deraumere");
+	tmp[3] = strdup("sibur");
+	tmp[4] = strdup("mendiane");
+	tmp[5] = strdup("phiras");
+	tmp[6] = strdup("thystame");
+	tmp[7] = strdup("food");
+	for (int i = 0; i < 8; i++) {
+		if (tmp[i] == NULL)
+			return (NULL);
+	}
+	return (tmp);
+}
+
+t_look	*add_elem_in_look(server	*server, const char *str)
+{
+	t_look	*new = malloc(sizeof(t_look));
+	t_look	*tmp = server->look;
+
+	if (new == NULL)
+		return (NULL);
+	new->str = str;
+	new->next = NULL;
+	if (tmp == NULL) {
+		tmp = new;
+		return (new);
+	}
+	else {
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+		return (server->look);
 	}
 }
 
-char	*get_ressources(server *server, int x, int y)
+int add_case(server *server, const int *ressources, char **rsrc)
 {
-	int	player = 0;
-	int	linemate = 0;
-	int	deraumere = 0;
-	int	sibur = 0;
-	int	mendiane = 0;
-	int	phiras = 0;
-	int	thystame = 0;
-	int	food = 0;
-	
-	player = get_nb_player(server, x, y);
-	while (server->map) {
-		if (server->map->node_pos->x == x && server->map->node_posY == y) {
-			linemate = server->map->rsrc->nb_linemate;
-			deraumere  = server->map->rsrc->nb_deraumere;
-			sibur = server->map->rsrc->nb_sibur;
-			mendiane = server->map->rsrc->nb_mendiane;
-			phiras = server->map->rsrc->nb_phiras;
-			thystame = server->map->rsrc->nb_thystame;
-			food = server->map->rsrc->nb_food;	
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < ressources[i]; j++) {
+			server->look = add_elem_in_look(server, rsrc[i]);
+			if (server->look == NULL)
+				return (-1);
 		}
 	}
+	return (0);
 }
 
-void	north(server *server, int i)
+int	*get_ressources(server *server, int x, int y, char **rsrc)
 {
-	int	j = 0;
-	int	eol = 3;
-	int	k = 0;
-	int	tmpX = server->client[i].posX;
-	int	tmpY = server->client[i].posY;
-	int	start_line = 0;
-	char	*look;
+	int *ressources;
+	t_map	*tmp = server->map;
 
-	
-	while (j != server->client[i].level) {
-		tmpX -= 1;
-		tmpY -= 1;
-		start_line = tmpX;
-		while (k < eol) {
-			look = get_ressources(server, start_line, tmpY);
-			start_line++;
-			k++;
+	ressources = malloc(sizeof(int) * 8);
+	if (ressources == NULL)
+		return (NULL);
+	ressources[0] = get_nb_player(server, x, y);
+	while (tmp) {
+		if (tmp->node_pos->x == x && tmp->node_pos->y == y) {
+			ressources[1] = server->map->rsrc->nb_linemate;
+			ressources[2]  = server->map->rsrc->nb_deraumere;
+			ressources[3] = server->map->rsrc->nb_sibur;
+			ressources[4] = server->map->rsrc->nb_mendiane;
+			ressources[5] = server->map->rsrc->nb_phiras;
+			ressources[6] = server->map->rsrc->nb_thystame;
+			ressources[7] = server->map->rsrc->nb_food;
 		}
-		eol += 2;
-		k = 0;
-		j++;
+		tmp = tmp->next;
 	}
+	add_case(server, ressources, rsrc);
+	return (ressources);
 }
 
-void	south(server *server, int i)
+int	handle_orient(server *server, int i, int x, int y)
 {
-	int	j = 0;
-	int	k = 0;
+	if (server->client[i].orient == NORTH || server->client[i].orient == SOUTH)
+		return (y);
+	else
+		return (x);
+}
+
+int handle_direction(server *server, int i)
+{
+	if (server->client[i].orient == NORTH || server->client[i].orient == WEST)
+		return (1);
+	else
+		return (-1);
+}
+
+int handle_xdirection(server *server, int x, int toward)
+{
+	if ((x + toward) < 0)
+		return (server->width - 1);
+	else if ((x + toward) > server->width - 1)
+		return (0);
+	else
+		return (x + toward);
+}
+
+int handle_ydirection(server *server, int y, int toward)
+{
+	if ((y + toward) < 0)
+		return (server->height - 1);
+	else if ((y + toward) > server->height - 1)
+		return (0);
+	else
+		return (y + toward);
+}
+
+int check_orient(server *server, int i)
+{
+	if (server->client[i].orient == NORTH || server->client[i].orient == SOUTH)
+		return (1);
+	else
+		return (-1);
+}
+
+int	direction(server *server, int i, int x, int y)
+{
 	int	eof = 3;
 	int	tmpX = server->client[i].posX;
 	int	tmpY = server->client[i].posY;
-	int	start_line = 0;
+	int start_line = 0;
+	char **rsrc = create_tab_ressources();
+	int toward = handle_direction(server, i);
 
-	while (j != server->client[i].level) {
-		tmpX += 1;
-		tmpY += 1;
-		start_line = tmpX;
-		while (k < eof) {
-			get_ressources(server, start_line, tmpY);
-			start_line--;
-			k++;
+	if (rsrc == NULL)
+		return (-1);
+	for(int j = 0; j < server->client[i].level; j++) {
+		tmpX = handle_xdirection(server, tmpX, x);
+		tmpY = handle_ydirection(server, tmpY, y);
+		start_line = handle_orient(server, i, tmpX, tmpY);
+		for(int k = 0; k < eof; k++) {
+			get_ressources(server, tmpX, start_line, rsrc);
+			if (k + 1 != eof)
+				add_elem_in_look(server, ",");
+			if (check_orient(server, i) == 1)
+				start_line = handle_ydirection(server, start_line, toward);
+			else
+				start_line = handle_xdirection(server, start_line, toward);
 		}
 		eof += 2;
-		k = 0;
-		j++;
- 	}
-}
-
-void	west(server *server, int i)
-{
-	int	j = 0;
-	int	k = 0;
-	int	eof = 3;
-	int	tmpX = server->client[i].posX;
-	int	tmpY = server->client[i].posY;
-	int	start_line = 0;
-
-	while (j != server->client[i].level) {
-		tmpX -= 1;
-		tmpY += 1;
-		start_line = tmpY;
-		while (k < eof) {
-			get_ressources(server, tmpX, start_line);
-			start_line--;
-			k++;
-		}
-		eof += 2;
-		k = 0;
-		j++;
 	}
+	return (0);
 }
 
-void	east(server *server, int i)
+void	send_vision(server *server, int i)
 {
-	int	j = 0;
-	int	k = 0;
-	int	eof = 3;
-	int	tmpX = server->client[i].posX;
-	int	tmpY = server->client[i].posY;
-	int	start_line = 0;
-
-	while (j != server->client[i].level) {
-		tmpX += 1;
-		tmpY -= 1;
-		start_line = tmpY;
-		while (k < eol) {
-			get_ressources(server, tmpX, start_line);
-			start_line++;
-			k++;
+	dprintf(server->client[i].fd, "[");
+	for (t_look *tmp = server->look; tmp != NULL; tmp = tmp->next) {
+		if (strcmp(tmp->str, ",") == 0) {
+			dprintf(server->client[i].fd, ",");
 		}
-		eol += 2;
-		k = 0;
-		j++;
+		else if (tmp->next == NULL) {
+			dprintf(server->client[i].fd, "%s]\n", tmp->str);
+		}
+		else {
+			if (tmp->next != NULL && strcmp(tmp->next->str, ",") == 0)
+				dprintf(server->client[i].fd, "%s", tmp->str);
+			else
+				dprintf(server->client[i].fd, "%s ", tmp->str);
+		}
 	}
 }
 
 void look(server *server, int i, char UNUSED **params)
 {
+	server->look = NULL;
+	server->client[i].orient = EAST;
+	server->client[i].posX = 19;
+	server->client[i].posY = 19;
+
 	switch(server->client[i].orient) {
-	case NORTH:
-		north(server, i);
-		break;
-	case EAST:
-		east(server, i);
-		break;
-	case WEST:
-		west(server, i);
-		break;
-	case SOUTH:
-		south(server, i);
-		break;
-	default:
-		break;
+		case NORTH:
+			if (direction(server, i, -1, -1) == -1)
+				exit(84);
+			break;
+		case EAST:
+			if (direction(server, i, 1, -1) == -1)
+				exit(84);
+			break;
+		case WEST:
+			if (direction(server, i, -1, 1) == -1)
+				exit(84);
+			break;
+		case SOUTH:
+			if (direction(server, i, 1, 1) == -1)
+				exit(84);
+			break;
+		default:
+			break;
 	}
-	dprintf(server->client[i].fd, "Look\n");
+	send_vision(server, i);
 }
