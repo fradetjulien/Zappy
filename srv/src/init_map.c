@@ -23,7 +23,7 @@ t_map		*init_pos(t_map *map, int xx, int yy)
 	new->node_pos->x = xx;
 	new->node_pos->y = yy;
 	new->next = NULL;
-    if (map == NULL)
+	if (map == NULL)
 		return (new);
 	else {
 		tmp = map;
@@ -38,13 +38,13 @@ t_map		*init_rsrc(t_map *map)
 {
 	if ((map->rsrc = malloc(sizeof(t_rsrc))) == NULL)
 		return NULL;
-	map->rsrc->nb_linemate = rand() % 3;
-	map->rsrc->nb_deraumere = rand() % 3;
-	map->rsrc->nb_sibur = rand() % 3;
-	map->rsrc->nb_mendiane = rand() % 3;
-	map->rsrc->nb_phiras = rand() % 3;
-	map->rsrc->nb_thystame = rand() % 3;
-	map->rsrc->nb_food = rand() % 3 + 1;
+	map->rsrc->nb_linemate = set_under_twenty();
+	map->rsrc->nb_deraumere = set_under_twenty();
+	map->rsrc->nb_sibur = set_under_fifthteen();
+	map->rsrc->nb_mendiane = set_under_fifthteen();
+	map->rsrc->nb_phiras = set_under_ten();
+	map->rsrc->nb_thystame = set_under_ten();
+	map->rsrc->nb_food = set_under_seven();
 	return (map);
 }
 
