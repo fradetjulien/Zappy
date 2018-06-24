@@ -34,7 +34,6 @@ int	Ia::getTravelTime(int x, int y)
 
 void	Ia::pathFinding()
 {
-    std::cout << _priorityPos.first << " - " << _priorityPos.second << std::endl;
 	int x = _priorityPos.first;
 	int y = _priorityPos.second;
 	int	travelTime = getTravelTime(x, y);
@@ -63,40 +62,31 @@ void	Ia::getPathNorth(int x, int y)
 	int	tmp_y = 0;
 	int	tmp_x = 0;
 
-    std::cout << "non1" << std::endl;
 	if (_posPlayer.second > y) {
-        std::cout << "non2" << std::endl;
 		tmp_y = _posPlayer.second;
 		while (tmp_y > y) {
-            std::cout << "non" << std::endl;
 			_actions.push_back(FORWARD);
 			tmp_y--;
 		}
 	}
 	if (x < _posPlayer.first) {
-        std::cout << "non2" << std::endl;
 		tmp_x = _posPlayer.first;
 		_actions.push_back(LEFT);
 		while (tmp_x > x) {
-            std::cout << "non" << std::endl;
 			_actions.push_back(FORWARD);
 			tmp_x--;
 		}
 	}
 	else if (x > _posPlayer.first) {
-        std::cout << "non2" << std::endl;
 		tmp_x = x;
 		_actions.push_back(RIGHT);
 		while (tmp_x < x) {
-            std::cout << "non" << std::endl;
 			_actions.push_back(FORWARD);
 			tmp_x++;
 		}
 	}
 	_posPlayer.first = tmp_x;
 	_posPlayer.second = tmp_y;
-    std::cout <<"pos x = " << _posPlayer.first << std::endl;
-    std::cout <<"pos y = " << _posPlayer.second << std::endl;
 }
 
 void	Ia::getPathEast(int x, int y)
@@ -129,8 +119,6 @@ void	Ia::getPathEast(int x, int y)
 	}
 	_posPlayer.first = tmp_x;
 	_posPlayer.second = tmp_y;
-    std::cout <<"pos x = " << _posPlayer.first << std::endl;
-    std::cout <<"pos y = " << _posPlayer.second << std::endl;
 }
 
 void	Ia::getPathWest(int x, int y)
@@ -163,8 +151,6 @@ void	Ia::getPathWest(int x, int y)
 	}
 	_posPlayer.first = tmp_x;
 	_posPlayer.second = tmp_y;
-    std::cout <<"pos x = " << _posPlayer.first << std::endl;
-    std::cout <<"pos y = " << _posPlayer.second << std::endl;
 }
 
 void	Ia::getPathSouth(int x, int y)
@@ -197,6 +183,4 @@ void	Ia::getPathSouth(int x, int y)
 	}
 	_posPlayer.first = tmp_x;
 	_posPlayer.second = tmp_y;
-    std::cout <<"pos x = " << _posPlayer.first << std::endl;
-    std::cout <<"pos y = " << _posPlayer.second << std::endl;
 }

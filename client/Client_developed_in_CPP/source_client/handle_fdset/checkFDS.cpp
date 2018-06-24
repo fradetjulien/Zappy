@@ -18,9 +18,7 @@ void			Client::whichStep()
 int			Client::checkFDS()
 {
 	for (int i = 0; i < (_fd + 1); i++) {
-		std::cout << i << std::endl;
 		if (FD_ISSET(_fd, &_read)) {
-            std::cout << "WAT PUTAIN" << std::endl;
             if (_cmdSend || _isAlreadySend < 3)
 			    getInstruction();
 			whichStep();

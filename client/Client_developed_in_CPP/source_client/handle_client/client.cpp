@@ -39,7 +39,6 @@ Client::~Client()
 
 void Client::send_look()
 {
-    std::cout << "oui" << std::endl;
     sendInstruction("Look");
     _cmdSend = true;
 }
@@ -79,21 +78,13 @@ void Client::send_plv()
 
 void	Client::execute_ia()
 {
-    std::cout << "wtf" << std::endl;
     if (!_cmdSend) {
-        std::cout << "==========EXECUTE CMD IA==============" << std::endl;
-        std::cout << "CMDSEND : " << std::boolalpha << _cmdSend << std::endl;
-        std::cout << "MODE : " << _mode << std::endl;
         _send[_mode]();
-        std::cout << "salut : " << std::endl;
     }
     else if (_readCmd) {
-        std::cout << "MODE : " << _mode << " wtf " << std::boolalpha << _readCmd << " and " << _cmdSend << std::endl;
-        std::cout << "CALL FUNC READ : " << _mode << std::endl;
         _execute[_mode]();
         _cmdSend = false;
         _readCmd = false;
-        std::cout << "==========END EXECUTE CMD IA==============" << std::endl;
     }
 }
 
