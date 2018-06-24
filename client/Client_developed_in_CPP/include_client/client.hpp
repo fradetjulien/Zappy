@@ -16,7 +16,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <memory>
+#include <functional>
 #include "socket.hpp"
+#include "ia.hpp"
 
 # define LOCALHOST	"127.0.0.1"
 
@@ -34,6 +37,10 @@ private:
     int			_fd;
     struct sockaddr_in	_s;
     socklen_t		_len;
+	std::unique_ptr<Ia> _ia;
+	std::size_t	_isAlreadySend;
+	std::unordered_map<std::size_t, std::function<void()>>	_step;
+
 public:
 
 /* Constructor & Destructor */
@@ -62,14 +69,15 @@ public:
 
 /* Handle Server */
 	void	contactServer();
-	int	remainingPlaces();
-	int	worldDimension();
+	void	remainingPlaces();
+	void	worldDimension();
 
 /* Handle Instruction */
 	int	getInstruction();
-	void	sendInstruction();
+	void	sendInstruction(const char *);
 	void	printInstruction(const char *);
 
+	void	execute_ia();
 };
 
 #endif /* !CLIENT_HPP_ */

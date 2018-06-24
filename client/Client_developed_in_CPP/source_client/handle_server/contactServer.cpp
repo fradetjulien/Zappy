@@ -9,7 +9,8 @@
 
 void		Client::contactServer()
 {
-	sendInstruction();
+	sendInstruction(_team.c_str());
 	printInstruction(_answerReceived.c_str());
 	printInstruction(_team.c_str());
+    _isAlreadySend = 1;
 }
