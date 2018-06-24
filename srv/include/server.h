@@ -10,7 +10,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <time.h>
-#include "ring_buffer.h"
 
 #define UNUSED __attribute__((__unused__))
 
@@ -58,7 +57,6 @@ typedef struct			s_map
 typedef struct t_execution {
     char *cmd;
     double time;
-    int time_cmd;
     struct t_execution *next;
 }s_execution;
 
@@ -171,9 +169,9 @@ char	**str_to_wordtab(char *str, char delimitor);
 t_rsrc *init_inventory();
 void manage_time(server *server);
 s_execution *add_execution_list(s_execution *list, char *buffer);
-s_execution *pop_element_execution(s_execution *list, char *buffer);
+s_execution *pop_element_execution(s_execution *list, int id_cmd);
 void print_execution(s_execution *list);
 double			get_time_micro();
-
+int count_action(s_execution *list);
 
 #endif /* SERVER_H_ */

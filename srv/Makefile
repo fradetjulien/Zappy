@@ -17,7 +17,6 @@ SRC_SERVER     =        src/main.c \
 			src/init_serv.c \
 			src/init_list_team.c \
 			src/init_zappy.c \
-			src/ring_buffer.c \
 			src/handle_client.c \
 			src/command.c \
 			src/commands/bct.c \
