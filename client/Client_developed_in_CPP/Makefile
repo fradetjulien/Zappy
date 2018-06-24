@@ -11,7 +11,7 @@ RM      = rm -f
 
 CPPFLAGS += -Wextra -Wall -I ../../include_client
 
-NAME_CLIENT    = ../zappy_ai
+NAME_CLIENT    = ../../zappy_ai
 
 SRC_CLIENT     =source_client/handle_client/client.cpp 			\
 		source_client/handle_client/launchClient.cpp		\
@@ -48,8 +48,6 @@ clean:
 fclean:
 	$(RM) $(OBJ_CLIENT)
 	$(RM) $(NAME_CLIENT)
-	@printf "\n[\33[1;32mCLEAN\033[0;m] Binary : myftp |"
-		" OBJ_CLIENT : $(OBJ_CLIENT)\n\n"
 
 re: fclean all
 

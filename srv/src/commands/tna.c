@@ -1,6 +1,6 @@
 #include "server.h"
 
-void tna(server *server, int i, char UNUSED **params)
+int tna(server *server, int i, char UNUSED **params)
 {
     team *tmp = server->team;
 
@@ -8,4 +8,5 @@ void tna(server *server, int i, char UNUSED **params)
         dprintf(server->client[i].fd, "tna %s\n", tmp->name_team);
         tmp = tmp->next;
     }
+    return (0);
 }

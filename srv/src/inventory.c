@@ -4,9 +4,9 @@
 
 #include "server.h"
 
-t_inventory *init_inventory()
+t_rsrc *init_inventory()
 {
-    t_inventory *inventory = malloc(sizeof(t_inventory));
+    t_rsrc *inventory = malloc(sizeof(t_rsrc));
 
     if (inventory == NULL)
         return NULL;

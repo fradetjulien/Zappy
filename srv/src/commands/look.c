@@ -15,7 +15,7 @@ int	get_nb_player(server *server, int x, int y)
 
 char **create_tab_ressources(void)
 {
-	char **tmp= malloc(sizeof(char *) * 8);
+	char **tmp = malloc(sizeof(char *) * 8);
 
 	if (tmp == NULL)
 		return (NULL);
@@ -147,7 +147,7 @@ int	direction(server *server, int i, int x, int y)
 
 	if (rsrc == NULL)
 		return (-1);
-	for(int j = 0; j < server->client[i].level; j++) {
+	for (int j = 0; j < server->client[i].level; j++) {
 		tmpX = handle_xdirection(server, tmpX, x);
 		tmpY = handle_ydirection(server, tmpY, y);
 		start_line = handle_orient(server, i, tmpX, tmpY);
@@ -167,13 +167,13 @@ int	direction(server *server, int i, int x, int y)
 
 void	send_vision(server *server, int i)
 {
-	dprintf(server->client[i].fd, "[");
+	dprintf(server->client[i].fd, "[ ");
 	for (t_look *tmp = server->look; tmp != NULL; tmp = tmp->next) {
 		if (strcmp(tmp->str, ",") == 0) {
-			dprintf(server->client[i].fd, ",");
+			dprintf(server->client[i].fd, ", ");
 		}
 		else if (tmp->next == NULL) {
-			dprintf(server->client[i].fd, "%s]\n", tmp->str);
+			dprintf(server->client[i].fd, "%s ]\n", tmp->str);
 		}
 		else {
 			if (tmp->next != NULL && strcmp(tmp->next->str, ",") == 0)
@@ -184,14 +184,16 @@ void	send_vision(server *server, int i)
 	}
 }
 
-void look(server *server, int i, char UNUSED **params)
+int look(server *server, int i, char UNUSED **params)
 {
+	double sec = get_time_micro();
+
 	server->look = NULL;
 	server->client[i].orient = EAST;
 	server->client[i].posX = 19;
 	server->client[i].posY = 19;
-
-	switch(server->client[i].orient) {
+        if ((sec - server->client[i].exec->time) >= (7 / server->frequency)) {
+		switch(server->client[i].orient) {
 		case NORTH:
 			if (direction(server, i, -1, -1) == -1)
 				exit(84);
@@ -210,6 +212,9 @@ void look(server *server, int i, char UNUSED **params)
 			break;
 		default:
 			break;
+		}
+		send_vision(server, i);
+		return (0);
 	}
-	send_vision(server, i);
+	return (1);
 }

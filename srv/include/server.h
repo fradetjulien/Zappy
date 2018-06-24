@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <time.h>
 #include "ring_buffer.h"
 
 #define UNUSED __attribute__((__unused__))
@@ -20,6 +21,7 @@ int     fill_width(char **av);
 int     fill_height(char **av);
 int     fill_nb_players(int ac, char **av);
 int	fill_max_client(int ac, char **av);
+int fill_frequency(int ac, char **av);
 
 enum ORIENT {
     NORTH,
@@ -52,15 +54,13 @@ typedef struct			s_map
 	struct s_map		*next;
 }			t_map;
 
-typedef struct s_inventory {
-    int		nb_linemate;
-    int		nb_deraumere;
-    int		nb_sibur;
-    int		nb_mendiane;
-    int		nb_phiras;
-    int		nb_thystame;
-    int		nb_food;
-}t_inventory;
+
+typedef struct t_execution {
+    char *cmd;
+    double time;
+    int time_cmd;
+    struct t_execution *next;
+}s_execution;
 
 typedef struct Client {
 	int fd;
@@ -71,8 +71,9 @@ typedef struct Client {
 	int posX;
 	int posY;
 	int orient;
-	t_inventory *inventory;
+	t_rsrc *inventory;
 	int time;
+	s_execution *exec;
 }client;
 
 typedef struct Team {
@@ -81,6 +82,20 @@ typedef struct Team {
         struct Team *next;
 }team;
 
+typedef struct		s_look
+{
+	const char 			*str;
+	struct s_look	*next;
+}					t_look;
+
+typedef struct Egg {
+        int             pos_x;
+        int             pos_y;
+        char            *team_name;
+        int             id;
+        struct Egg      *prev;
+        struct Egg      *next;
+}egg;
 
 typedef struct Server {
     int fd;
@@ -89,39 +104,43 @@ typedef struct Server {
 	int width;
 	int height;
 	int nb_player;
-	int max_client;
-    rbuffer *buffer;
+	int frequency;
 	client *client;
     int     nbMax;
 	team *team;
 	int actual;
-	char *cmd[20];
-	void (*command[20])(struct Server *, int, char **);
+	char *cmd[21];
+	int (*command[21])(struct Server *, int, char **);
 	t_map *map;
+	t_look *look;
+	egg *eggs;
 }server;
 
+int execute_cmd(server *);
+
 /*commands*/
-void ppo(server *server, int i, char **paramss);
-void sst(server *server, int i, char **params);
-void bct(server *server, int i, char **params);
-void broadcast(server *server, int i, char **params);
-void connect_nbr(server *server, int i, char **params);
-void eject(server *server, int i, char **params);
-void _fork(server *server, int i, char **params);
-void incantation(server *server, int i, char **params);
-void inventory(server *server, int i, char **params);
-void look(server *server, int i, char **params);
-void msz(server *server, int i, char **params);
-void mct(server *server, int i, char **params);
-void forward(server *server, int i, char **params);
-void left(server *server, int i, char **params);
-void right(server *server, int i, char **params);
-void pdi(server *server, int UNUSED i, char UNUSED **params);
-void pin(server *server, int i, char **params);
-void plv(server *server, int i, char **params);
-void sgt(server *server, int i, char **params);
-void take(server *server, int i, char **params);
-void tna(server *server, int i, char **params);
+int ppo(server *server, int i, char **params);
+int sst(server *server, int i, char **params);
+int bct(server *server, int i, char **params);
+int broadcast(server *server, int i, char **params);
+int connect_nbr(server *server, int i, char **params);
+int eject(server *server, int i, char **params);
+int _fork(server *server, int i, char **params);
+int incantation(server *server, int i, char **params);
+int inventory(server *server, int i, char **params);
+int set(server *server, int i, char **params);
+int look(server *server, int i, char **params);
+int msz(server *server, int i, char **params);
+int mct(server *server, int i, char **params);
+int forward(server *server, int i, char **params);
+int left(server *server, int i, char **params);
+int right(server *server, int i, char **params);
+int pin(server *server, int i, char **params);
+int plv(server *server, int i, char **params);
+int sgt(server *server, int i, char **params);
+int take(server *server, int i, char **params);
+int tna(server *server, int i, char **params);
+int pdi(server *server);
 //
 
 /*map*/
@@ -145,10 +164,16 @@ client *add_client(client *list);
 void    init_client(client *, server *);
 void show_client(client *list);
 int     manage_cmd(server*, int fd);
-void	manage_client(server *server, fd_set rdfs);
+void	manage_client(server *server, fd_set rdfs, char **buf);
 void init_command(server *server);
 void init_function_command(server *server);
 char	**str_to_wordtab(char *str, char delimitor);
-t_inventory *init_inventory();
+t_rsrc *init_inventory();
+void manage_time(server *server);
+s_execution *add_execution_list(s_execution *list, char *buffer);
+s_execution *pop_element_execution(s_execution *list, char *buffer);
+void print_execution(s_execution *list);
+double			get_time_micro();
+
 
 #endif /* SERVER_H_ */

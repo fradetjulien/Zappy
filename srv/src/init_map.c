@@ -56,6 +56,7 @@ t_map		*init_map(server *server)
 
 	xx = -1;
 	map = NULL;
+	srand(time(NULL));
 	while (++xx < server->height) {
 		yy = -1;
 	    while (++yy < server->width) {

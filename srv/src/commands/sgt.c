@@ -1,6 +1,7 @@
 #include "server.h"
 
-void sgt(server *server, int i, char UNUSED **params)
+int sgt(server *server, int i, char UNUSED **params)
 {
-    dprintf(server->client[i].fd, "Sgt\n");
+    dprintf(server->client[i].fd, "sgt %d\n", server->frequency);
+    return (0);
 }

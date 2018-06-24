@@ -1,6 +1,6 @@
 #include "server.h"
 
-void connect_nbr(server *server, int i, char UNUSED **params)
+int connect_nbr(server *server, int i, char UNUSED **params)
 {
     team *tmp = server->team;
 
@@ -10,4 +10,5 @@ void connect_nbr(server *server, int i, char UNUSED **params)
         }
         tmp = tmp->next;
     }
+    return (0);
 }

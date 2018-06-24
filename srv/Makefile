@@ -29,6 +29,7 @@ SRC_SERVER     =        src/main.c \
 			src/commands/inventory.c \
 			src/commands/look.c \
 			src/commands/map_size.c \
+			src/commands/set.c \
 			src/commands/mct.c \
 			src/commands/move.c \
 			src/commands/pdi.c \
@@ -44,7 +45,11 @@ SRC_SERVER     =        src/main.c \
 			src/set_rsrcbis.c \
 			src/utils.c \
 			src/my_str_to_wordtab.c \
-			src/inventory.c
+			src/inventory.c \
+			src/execute_cmd.c \
+			src/manage_time.c \
+			src/init_execution.c \
+			src/get_time_micro.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

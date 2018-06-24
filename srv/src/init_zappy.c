@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-int verification_args(char **av)
+int	verification_args(char **av)
 {
 	if (strcmp(av[1], "-p") != 0 ||
 	    strcmp(av[3], "-x") != 0 ||
@@ -32,7 +32,7 @@ int	fill_height(char **av)
 	return (atoi(av[6]));
 }
 
-team *fill_name_teams(int ac, char **av)
+team	*fill_name_teams(int ac, char **av)
 {
 	team *list = NULL;
 
@@ -61,6 +61,18 @@ int	fill_max_client(int ac, char **av)
 	while (i < ac) {
 		if (strcmp(av[i], "-n") == 0)
 			break ;
+	}
+	return (atoi(av[i + 1]));
+}
+
+int	fill_frequency(int ac, char **av)
+{
+	int i = 0;
+
+	while (i < ac) {
+		if (strcmp(av[i], "-f") == 0)
+			break ;
+		i++;
 	}
 	return (atoi(av[i + 1]));
 }

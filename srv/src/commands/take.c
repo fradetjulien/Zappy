@@ -65,18 +65,24 @@ static int    check_on_map_third(t_map *tmp, server *server, char **params, int 
     return (0);
 }
 
-void take(server *server, int i, char **params)
+int take(server *server, int i, char **params)
 {
 	t_map	*tmp = server->map;
+	double sec = get_time_micro();
 
-	while (tmp) {
-	    if (tmp->node_pos->x == server->client[i].posX &&
-            tmp->node_pos->y == server->client[i].posY) {
-	        if (check_on_map_first(tmp, server, params, i) == 0 &&
-	            check_on_map_second(tmp, server, params, i) == 0 &&
-                check_on_map_third(tmp, server, params, i) == 0)
-	            dprintf(server->client[i].fd, "ko\n");
-        }
-	    tmp = tmp->next;
+        if ((sec - server->client[i].exec->time)
+	    >= (7 / server->frequency)) {
+		while (tmp) {
+			if (tmp->node_pos->x == server->client[i].posX &&
+			    tmp->node_pos->y == server->client[i].posY) {
+				if (check_on_map_first(tmp, server, params, i) == 0 &&
+				    check_on_map_second(tmp, server, params, i) == 0 &&
+				    check_on_map_third(tmp, server, params, i) == 0)
+					dprintf(server->client[i].fd, "ko\n");
+			}
+			tmp = tmp->next;
+		}
+		return (0);
 	}
+	return (1);
 }
