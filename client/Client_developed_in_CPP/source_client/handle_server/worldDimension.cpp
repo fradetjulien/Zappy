@@ -16,6 +16,7 @@ void			Client::worldDimension()
 	while (!_answerReceived.empty() && _answerReceived[++i] != ' ');
 	std::string	tmp = &_answerReceived[i];
 	_orderly = atoi(tmp.c_str());
+	_ia->setSizeMap(_abscissa, _orderly);
 	if (_abscissa < 1 || _orderly < 1)
 		throw MyError("ici");
 	else
