@@ -7,7 +7,7 @@
 
 #include "../../include_client/client.hpp"
 
-void		Client::sendInstruction()
+void		Client::sendInstruction(const char *instruction)
 {
-	dprintf(_fd, "%s\n", _answerReceived.c_str());
+	dprintf(_fd, "%s\n", instruction);
 }

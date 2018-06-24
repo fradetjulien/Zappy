@@ -32,6 +32,7 @@ SRC_CLIENT     =source_client/handle_client/client.cpp 			\
 		source_client/handle_socket/closeSocket.cpp 		\
 		source_client/handle_socket/connectionServer.cpp	\
 		source_client/exception.cpp \
+		source_client/ia.cpp \
 		source_client/main.cpp
 
 OBJ_CLIENT     = $(SRC_CLIENT:.cpp=.o)

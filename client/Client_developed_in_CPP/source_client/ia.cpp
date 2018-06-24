@@ -150,3 +150,8 @@ void Ia::getRightPos(const std::size_t &tmp)
             _priorityPos.second -= 1;
     }
 }
+
+void Ia::setPosPlayer(const std::string &set)
+{
+
+}

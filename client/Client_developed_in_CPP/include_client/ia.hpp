@@ -31,6 +31,8 @@ public:
     ~Ia() = default;
     void parseLook(const std::string &);
     void initPriority();
+    void setPosPlayer(const std::string &);
+    void setOrientation(const std::string &);
 
 private:
     std::vector<std::unordered_map<std::string, Priority >>  _priorityByLevel;

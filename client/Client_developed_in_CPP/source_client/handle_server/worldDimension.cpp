@@ -8,10 +8,10 @@
 #include "../../include_client/client.hpp"
 #include "../../include_client/exception.hpp"
 
-int			Client::worldDimension()
+void			Client::worldDimension()
 {
 	int		i = -1;
-	
+
 	_abscissa = atoi(_answerReceived.c_str());
 	while (!_answerReceived.empty() && _answerReceived[++i] != ' ');
 	std::string	tmp = &_answerReceived[i];
@@ -20,5 +20,5 @@ int			Client::worldDimension()
 		throw MyError("ici");
 	else
 		dprintf(1, "%d %d\n", _abscissa, _orderly);
-	return (0);
+	_isAlreadySend = 3;
 }

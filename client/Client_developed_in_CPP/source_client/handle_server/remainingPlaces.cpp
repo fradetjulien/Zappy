@@ -8,11 +8,12 @@
 #include "../../include_client/client.hpp"
 #include "../../include_client/exception.hpp"
 
-int		Client::remainingPlaces()
+void	Client::remainingPlaces()
 {
 	if (atoi(_answerReceived.c_str()) >= 1) {
 		printInstruction(_answerReceived.c_str());
-		return (0);
+		_isAlreadySend = 2;
+		return ;
 	}
 	throw MyError("ici alors");
 }
