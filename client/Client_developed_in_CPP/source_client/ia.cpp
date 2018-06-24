@@ -292,6 +292,7 @@ std::string Ia::doActions(const std::size_t &i)
         return ("Left");
     else if (_actions[i] == RIGHT)
         return ("Right");
+    return ("stop");
 }
 
 void Ia::printPos()

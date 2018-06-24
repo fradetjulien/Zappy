@@ -77,38 +77,38 @@ void	draw_player(graphics *graph, SDL_Rect pos)
 void	draw_tiles(graphics *graph, SDL_Rect pos,
 mappos map_pos, server *server)
 {
-	int	i = 0;
-	client	*tmp;
-	s_execution	*exec_tmp;
+//	int	i = 0;
+//	client	*tmp;
 	int	is_incant = 0;
-
-	tmp = server->client;
-	while (i++ != server->nb_player) {
-		exec_tmp = tmp[i].exec;
-		while (exec_tmp->next != NULL) {
-			if (strcmp(exec_tmp->cmd, "Incantation\n") == 0 &&
-			(tmp->posX == map_pos.x && tmp->posY == map_pos.y))
-			is_incant = draw_incant(graph, pos);
-			exec_tmp = exec_tmp->next;
-		}
-	}
+	(void)map_pos;
+	(void)server;
+//	tmp = server->client;
+	/* while (i++ != server->nb_player) { */
+	/* 	exec_tmp = tmp[i].exec; */
+	/* 	while (exec_tmp != NULL) { */
+	/* 		if (strcmp(exec_tmp->cmd, "Incantation\n") == 0 && */
+	/* 		(tmp->posX == map_pos.x && tmp->posY == map_pos.y)) */
+	/* 		is_incant = draw_incant(graph, pos); */
+	/* 		exec_tmp = exec_tmp->next; */
+	/* 	} */
+	/* } */
 	if (is_incant == 0) {
 		SDL_SetRenderDrawColor(graph->renderer, 0, 0, 0, 0);
 		SDL_RenderDrawRect(graph->renderer, &pos);
 	}
 }
 
-int	draw_incant(graphics *graph, SDL_Rect pos)
-{
-	SDL_Surface	*surface;
-	SDL_Texture	*texture;
+/* int	draw_incant(graphics *graph, SDL_Rect pos) */
+/* { */
+/* 	SDL_Surface	*surface; */
+/* 	SDL_Texture	*texture; */
 
-	surface = SDL_CreateRGBSurface(0, pos.w, pos.h, 32, 0, 0, 0, 0);
-	SDL_FillRect(surface, NULL,
-	SDL_MapRGBA(surface->format, 0, 0, 0 , 255));
-	SDL_SetRenderDrawColor(graph->renderer, 0, 0, 255, 255);
-	SDL_RenderDrawRect(graph->renderer, &pos);
-	texture = SDL_CreateTextureFromSurface(graph->renderer, surface);
-	SDL_RenderCopy(graph->renderer, texture, NULL, &pos);
-	return 1;
-}
+/* 	surface = SDL_CreateRGBSurface(0, pos.w, pos.h, 32, 0, 0, 0, 0); */
+/* 	SDL_FillRect(surface, NULL, */
+/* 	SDL_MapRGBA(surface->format, 0, 0, 0 , 255)); */
+/* 	SDL_SetRenderDrawColor(graph->renderer, 0, 0, 255, 255); */
+/* 	SDL_RenderDrawRect(graph->renderer, &pos); */
+/* 	texture = SDL_CreateTextureFromSurface(graph->renderer, surface); */
+/* 	SDL_RenderCopy(graph->renderer, texture, NULL, &pos); */
+/* 	return 1; */
+/* } */

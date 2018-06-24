@@ -10,17 +10,17 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <time.h>
+#include "SDL2/SDL.h"
 
 #define UNUSED __attribute__((__unused__))
 
 int     loop_server(int ac, char **av);
-int	verification_args(char **av);
-int	fill_port(char **av);
-int     fill_width(char **av);
-int     fill_height(char **av);
+int	    fill_port(int ac, char **av);
+int     fill_width(int ac, char **av);
+int     fill_height(int ac, char **av);
 int     fill_nb_players(int ac, char **av);
-int	fill_max_client(int ac, char **av);
-int fill_frequency(int ac, char **av);
+int	    fill_max_client(int ac, char **av);
+int     fill_frequency(int ac, char **av);
 
 enum ORIENT {
     NORTH,
@@ -95,6 +95,18 @@ typedef struct Egg {
         struct Egg      *next;
 }egg;
 
+typedef struct	Mappos {
+	int	x;
+	int	y;
+}		mappos;
+
+typedef struct  Graphics {
+        int             window_width;
+        int             window_height;
+        SDL_Window      *window;
+        SDL_Renderer    *renderer;
+}               graphics;
+
 typedef struct Server {
     int fd;
 	int fd_max;
@@ -154,24 +166,76 @@ int	my_random(int b);
 int	my_range_random(int a, int b);
 //
 
+/* graphics */
+int	init_sdl(graphics *graph);
+void	init_rsrcs_textures(graphics *graph);
+void	init_player_textures(graphics *graph);
+int	destroy_sdl_elements(graphics *graph);
+int	draw_map(graphics *graph, server *);
+void	draw_rects(graphics *, server *, int, int);
+int	get_events(SDL_Event event, int *, int *);
+void	draw_ressources(graphics *, server *, SDL_Rect pos, mappos map_pos);
+void	draw_stones(graphics *, t_map *, SDL_Rect pos);
+void	draw_linemate(graphics *, t_map *, SDL_Rect pos);
+void	draw_deraumere(graphics *, t_map *, SDL_Rect pos);
+void	draw_sibur(graphics *, t_map *, SDL_Rect pos);
+void	draw_mendiane(graphics *, t_map *, SDL_Rect pos);
+void	draw_phiras(graphics *, t_map *, SDL_Rect pos);
+void	draw_thystame(graphics *, t_map *, SDL_Rect pos);
+void	draw_food(graphics *, t_map *, SDL_Rect pos);
+void	draw_player(graphics *, SDL_Rect pos);
+void	draw_tiles(graphics *graph, SDL_Rect pos, mappos map_pos, server *);
+int	draw_incant(graphics *, SDL_Rect pos);
+void	set_rects_pos(mappos *, mappos *, mappos *, graphics *);
+//
 
-team    *add_list_team(char *name_team, team *list, int ac, char **av);
-void    show_list_team(team *list);
-team *fill_name_teams(int ac, char **av);
-client *add_client(client *list);
-void    init_client(client *, server *);
-void show_client(client *list);
-int     manage_cmd(server*, int fd);
-void	manage_client(server *server, fd_set rdfs, char **buf);
-void init_command(server *server);
-void init_function_command(server *server);
-char	**str_to_wordtab(char *str, char delimitor);
-t_rsrc *init_inventory();
-void manage_time(server *server);
-s_execution *add_execution_list(s_execution *list, char *buffer);
-s_execution *pop_element_execution(s_execution *list, int id_cmd);
-void print_execution(s_execution *list);
+/*incantation*/
+void evolution_1(server *server, int i, int *incantation, t_map *map);
+void evolution_2(server *server, int i, int *incantation, t_map *map);
+void evolution_3(server *server, int i, int *incantation, t_map *map);
+void evolution_4(server *server, int i, int *incantation, t_map *map);
+void evolution_5(server *server, int i, int *incantation, t_map *map);
+int check_players(server *server, int i, int players);
+//
+
+/*handle_direction*/
+int     handle_orient(server *server, int i, int x, int y);
+int handle_direction(server *server, int i);
+int handle_x(server *server, int x, int toward);
+int handle_y(server *server, int y, int toward);
+int     direction(server *server, int i, int x, int y);
+void manage_dire(server *server, int *st, int toward, int i);
+//
+
+/*look*/
+char **create_tab_ressources(void);
+t_look  *add_elem_in_look(server *server, const char *str);
+int add_case(server *server, const int *ressources, char **rsrc);
+int     get_nb_player(server *server, int x, int y);
+int check_orient(server *server, int i);
+void    send_vision(server *server, int i);
+int     *get_ressources(server *server, int x, int y, char **rsrc);
+
+//
+
+team            *add_list_team(char *name_team, team *list, int ac, char **av);
+void            show_list_team(team *list);
+team            *fill_name_teams(int ac, char **av);
+client          *add_client(client *list);
+void            init_client(client *, server *);
+void            show_client(client *list);
+int             manage_cmd(server*, int fd);
+void	       manage_client(server *server, fd_set rdfs, char **buf);
+void            init_command(server *server);
+void            init_function_command(server *server);
+char	       **str_to_wordtab(char *str, char delimitor);
+t_rsrc          *init_inventory();
+void            manage_time(server *server);
+s_execution     *add_execution_list(s_execution *list, char *buffer);
+s_execution     *pop_element_execution(s_execution *list, int id_cmd);
+void            print_execution(s_execution *list);
 double			get_time_micro();
-int count_action(s_execution *list);
+int             count_action(s_execution *list);
+int	            win(server *server);
 
 #endif /* SERVER_H_ */

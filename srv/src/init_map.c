@@ -44,7 +44,7 @@ t_map		*init_rsrc(t_map *map)
 	map->rsrc->nb_mendiane = set_under_fifthteen();
 	map->rsrc->nb_phiras = set_under_ten();
 	map->rsrc->nb_thystame = set_under_ten();
-	map->rsrc->nb_food = set_under_seven();
+	map->rsrc->nb_food = my_range_random(1, 3);
 	return (map);
 }
 
@@ -56,18 +56,17 @@ t_map		*init_map(server *server)
 
 	xx = -1;
 	map = NULL;
-	srand(time(NULL));
 	while (++xx < server->height) {
 		yy = -1;
-	    while (++yy < server->width) {
+		while (++yy < server->width) {
 			if ((map = init_pos(map, xx, yy)) == NULL)
 				return NULL;
 		}
 	}
 	t_map *tmp = map;
 	while (tmp) {
-	    tmp = init_rsrc(tmp);
-	    tmp = tmp->next;
+		tmp = init_rsrc(tmp);
+		tmp = tmp->next;
 	}
 	return map;
 }

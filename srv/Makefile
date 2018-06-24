@@ -9,7 +9,7 @@ CC      = gcc -g
 
 RM      = rm -f
 
-CFLAGS += -Wextra -Wall -I include/
+CFLAGS += -Wextra -Wall -I include/ -lSDL2
 
 NAME_SERVER    = ../zappy_server
 
@@ -17,6 +17,7 @@ SRC_SERVER     =        src/main.c \
 			src/init_serv.c \
 			src/init_list_team.c \
 			src/init_zappy.c \
+			src/fill_size_map.c \
 			src/handle_client.c \
 			src/command.c \
 			src/commands/bct.c \
@@ -25,8 +26,10 @@ SRC_SERVER     =        src/main.c \
 			src/commands/eject.c \
 			src/commands/fork.c \
 			src/commands/incantation.c \
+			src/commands/elevation.c \
 			src/commands/inventory.c \
 			src/commands/look.c \
+			src/commands/look2.c \
 			src/commands/map_size.c \
 			src/commands/set.c \
 			src/commands/mct.c \
@@ -39,6 +42,7 @@ SRC_SERVER     =        src/main.c \
 			src/commands/sst.c \
 			src/commands/take.c \
 			src/commands/tna.c \
+			src/commands/handle_direction.c \
 			src/init_map.c \
 			src/set_rsrc.c \
 			src/set_rsrcbis.c \
@@ -48,7 +52,12 @@ SRC_SERVER     =        src/main.c \
 			src/execute_cmd.c \
 			src/manage_time.c \
 			src/init_execution.c \
-			src/get_time_micro.c
+			src/get_time_micro.c \
+			src/win.c \
+			src/draw_graphics.c \
+			src/draw_player.c \
+			src/draw_stones.c \
+			src/handle_graphics.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 
