@@ -15,17 +15,112 @@ Client::Client(int ac, char **av)
 	}
 	_isAlreadySend = 0;
 	_ia = std::make_unique<Ia>();
+    _ia->initPlayer();
 	_step[0] = std::bind(&Client::contactServer, this);
 	_step[1] = std::bind(&Client::remainingPlaces, this);
 	_step[2] = std::bind(&Client::worldDimension, this);
 	_step[3] = std::bind(&Client::execute_ia, this);
+    _execute[LOOK] = std::bind(&Client::execute_look, this);
+    _execute[MOVE] = std::bind(&Client::execute_move, this);
+    _execute[PPO] = std::bind(&Client::execute_ppo, this);
+    _execute[PLV] = std::bind(&Client::execute_plv, this);
+    _send[LOOK] = std::bind(&Client::send_look, this);
+    _send[MOVE] = std::bind(&Client::send_move, this);
+    _send[PPO] = std::bind(&Client::send_ppo, this);
+    _send[PLV] = std::bind(&Client::send_plv, this);
+    _cmdSend = false;
+    _readCmd = false;
+    _mode = PLV;
 }
 
 Client::~Client()
 {
 }
 
+void Client::send_look()
+{
+    std::cout << "oui" << std::endl;
+    sendInstruction("Look");
+    _cmdSend = true;
+}
+
+void Client::send_move()
+{
+    static std::size_t move = 0;
+    std::string tmp = _ia->doActions(move);
+
+    if (tmp == "stop") {
+        _mode = LOOK;
+        _cmdSend = false;
+        move = 0;
+    }
+    else {
+        sendInstruction(tmp.c_str());
+        move += 1;
+        _cmdSend = true;
+    }
+}
+
+void Client::send_ppo()
+{
+    std::string tmp = "ppo #" + _team;
+
+    sendInstruction(tmp.c_str());
+    _cmdSend = true;
+}
+
+void Client::send_plv()
+{
+    std::string tmp = "plv #" + _team;
+
+    sendInstruction(tmp.c_str());
+    _cmdSend = true;
+}
+
 void	Client::execute_ia()
 {
+    std::cout << "wtf" << std::endl;
+    if (!_cmdSend) {
+        std::cout << "==========EXECUTE CMD IA==============" << std::endl;
+        std::cout << "CMDSEND : " << std::boolalpha << _cmdSend << std::endl;
+        std::cout << "MODE : " << _mode << std::endl;
+        _send[_mode]();
+        std::cout << "salut : " << std::endl;
+    }
+    else if (_readCmd) {
+        std::cout << "MODE : " << _mode << " wtf " << std::boolalpha << _readCmd << " and " << _cmdSend << std::endl;
+        std::cout << "CALL FUNC READ : " << _mode << std::endl;
+        _execute[_mode]();
+        _cmdSend = false;
+        _readCmd = false;
+        std::cout << "==========END EXECUTE CMD IA==============" << std::endl;
+    }
+}
 
+void    Client::execute_look()
+{
+    _ia->printPos();
+    _ia->parseLook(_answerReceived);
+    _ia->pathFinding();
+    _mode = MOVE;
+    _readCmd = false;
+}
+
+void Client::execute_move()
+{
+    _readCmd = false;
+}
+
+void Client::execute_ppo()
+{
+    _ia->handlePpo(_answerReceived);
+    _mode = LOOK;
+    _readCmd = false;
+}
+
+void Client::execute_plv()
+{
+    _ia->handlePlv(_answerReceived);
+    _mode = PPO;
+    _readCmd = false;
 }

@@ -9,5 +9,6 @@
 
 void		Client::sendInstruction(const char *instruction)
 {
+	std::cout << "SENDING : [" << instruction << "]" << std::endl;
 	dprintf(_fd, "%s\n", instruction);
 }

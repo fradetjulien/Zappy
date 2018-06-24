@@ -9,17 +9,20 @@
 
 void			Client::whichStep()
 {
-	if (_isAlreadySend == 0 && isWelcome() == 0)
-		_step[_isAlreadySend]();
-	else if (_isAlreadySend != 0)
-		_step[_isAlreadySend]();
+    if (_isAlreadySend == 0 && isWelcome() == 0)
+        _step[_isAlreadySend]();
+    else if (_isAlreadySend != 0)
+        _step[_isAlreadySend]();
 }
 
 int			Client::checkFDS()
 {
 	for (int i = 0; i < (_fd + 1); i++) {
+		std::cout << i << std::endl;
 		if (FD_ISSET(_fd, &_read)) {
-			getInstruction();
+            std::cout << "WAT PUTAIN" << std::endl;
+            if (_cmdSend || _isAlreadySend < 3)
+			    getInstruction();
 			whichStep();
 		}
 	}

@@ -23,6 +23,13 @@
 
 # define LOCALHOST	"127.0.0.1"
 
+enum Mode {
+    LOOK,
+    MOVE,
+    PLV,
+    PPO
+};
+
 class				Client
 {
 private:
@@ -40,6 +47,20 @@ private:
 	std::unique_ptr<Ia> _ia;
 	std::size_t	_isAlreadySend;
 	std::unordered_map<std::size_t, std::function<void()>>	_step;
+    std::unordered_map<Mode, std::function<void()>> _execute;
+    std::unordered_map<Mode, std::function<void()>> _send;
+    Mode _mode;
+    bool _cmdSend;
+    bool    _readCmd;
+
+    void send_look();
+    void send_move();
+    void send_ppo();
+    void send_plv();
+    void execute_look();
+    void execute_move();
+    void execute_ppo();
+    void execute_plv();
 
 public:
 
