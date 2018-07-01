@@ -8,12 +8,12 @@
 
 void Ia::parseLook(const std::string &look)
 {
-    std::cout << "LOOK === " << look << std::endl;
     std::size_t i = 1;
     std::size_t firstComma = look.find(',');
     std::size_t lastComma = look.find_last_of(',');
     std::size_t secondComma;
 
+    _priority.clear();
     _ressources = look.substr(look.find('[') + 1, firstComma - 1);
     parseTitle(_ressources, 0);
     while (firstComma != lastComma) {
@@ -33,7 +33,6 @@ void Ia::parseTitle(const std::string &look, const std::size_t &i)
 {
     std::istringstream iss(look);
     while (std::getline(iss, _ressources, ' ')) {
-        std::cout << _ressources << " at index : " << i << std::endl;
         checkPriority(i);
     }
 }
@@ -43,7 +42,7 @@ Ia::Ia() {
 
 void Ia::initPriority()
 {
-    std::vector<Priority>   tmp{VERY_HIGH, USELESS, USELESS, USELESS, USELESS, RARE};
+    std::vector<Priority>   tmp{VERY_HIGH, USELESS, USELESS, USELESS, USELESS, USELESS, VERY_LOW};
     _priorityByLevel.push_back(createMap(tmp));
     tmp = {MEDIUM, HIGH, VERY_HIGH, USELESS, USELESS, RARE, USELESS};
     _priorityByLevel.push_back(createMap(tmp));
@@ -61,9 +60,8 @@ void Ia::initPriority()
 
 void Ia::checkPriority(const std::size_t &i)
 {
-    if (_inventory[_ressources] <_needByLevel[_level][_ressources]) {
-        if (_priority.empty() ||
-            _priorityByLevel[_level][_ressources] > _priorityByLevel[_level][_priority]) {
+    if (_inventory[_ressources] <_needByLevel[_level - 1][_ressources]) {
+        if (_priorityByLevel[_level - 1][_ressources] > _priorityByLevel[_level - 1][_priority]) {
             _priority = _ressources;
             _indexLook = i;
         }
@@ -194,8 +192,6 @@ std::vector<std::string> Ia::getParsedVector(const std::string &answer)
     while (std::getline(iss, tmp, ' ')) {
         parse.push_back(tmp);
     }
-    for (auto &i : parse)
-        std::cout << i << std::endl;
     return parse;
 }
 
@@ -233,7 +229,7 @@ std::unordered_map<std::string, T> Ia::createMap(const std::vector<T> &prio)
     tmp["sibur"] = prio[2];
     tmp["mendiane"] = prio[3];
     tmp["phiras"] = prio[4];
-    tmp["thystane"] = prio[5];
+    tmp["thystame"] = prio[5];
     tmp["food"] = prio[6];
 
     return tmp;
@@ -295,8 +291,20 @@ std::string Ia::doActions(const std::size_t &i)
     return ("stop");
 }
 
-void Ia::printPos()
+std::string Ia::getPriority() const {
+    return (_priority);
+}
+
+void Ia::checkLevelUp()
 {
-    std::cout << "player pos x : " << _posPlayer.first << std::endl;
-    std::cout << "player pos y : " << _posPlayer.second << std::endl;
+    if (_inventory["linemate"] >= _needByLevel[_level]["linemate"])
+        _levelUp = true;
+    else
+        _levelUp = false;
+
+}
+
+bool Ia::needLevelUp() const
+{
+    return (_levelUp);
 }

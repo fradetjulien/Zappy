@@ -79,8 +79,9 @@ static void server_client(server *server, struct timeval *tv,
 	int i = 0;
 	int s;
 	
-	for (i = 0; i < server->actual; i++)
+	for (i = 0; i < server->actual; i++) {
 		FD_SET(server->client[i].fd, &rdfs);
+	}
 	s = select(server->fd_max + 1, &rdfs, NULL, NULL, tv);
 	if (s == -1) {
 		perror("select");
@@ -103,7 +104,6 @@ int	loop_server(int ac, char **av)
 {
 	server server;
 	fd_set rdfs;
-	graphics graph;
 	struct timeval	tv;
 	char *buf = malloc(sizeof(char) * 4096);
 
@@ -113,7 +113,6 @@ int	loop_server(int ac, char **av)
 	if (server.fd == -1)
 		return -1;
 	printf("Port : %d\n", server.port);
-	init_sdl(&graph);
 	while (1) {
 		FD_ZERO(&rdfs);
 		FD_SET(STDIN_FILENO, &rdfs);
@@ -121,10 +120,6 @@ int	loop_server(int ac, char **av)
 		tv.tv_sec = 0;
 		tv.tv_usec = 1000000 / server.frequency;
 		server_client(&server, &tv, rdfs, buf);
-		if (draw_map(&graph, &server) == 1) {
-			destroy_sdl_elements(&graph);
-			break;
-		}
 	}
 	return (0);
 }

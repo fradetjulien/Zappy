@@ -10,16 +10,11 @@
 void evolution_1(server *server, int i, int *incantation, t_map *map)
 {
 	if (server->client[i].level == 1) {
-		if (map->rsrc->nb_linemate == 1
-		&& map->rsrc->nb_deraumere == 0
-		&& map->rsrc->nb_sibur == 0
-		&& map->rsrc->nb_phiras == 0
-		&& map->rsrc->nb_thystame == 0
-		&& map->rsrc->nb_mendiane == 0) {
+		if (map->rsrc->nb_linemate >= 1) {
 			*incantation = 1;
 			return;
 		}
-        }
+	}
 }
 
 void evolution_2(server *server, int i, int *incantation, t_map *map)

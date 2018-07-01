@@ -13,7 +13,6 @@ int		Client::isWriteArguments(char **av)
 	if ((strcmp(av[1], "-p") != 0) ||
 	(strcmp(av[3], "-n") != 0) ||
 	(strcmp(av[5], "-h") != 0)) {
-		std::cout << "oui\n";
                 return (-1);
         }
 	else if (isHostname(av[6]) != 0 || isPort(av[2]) != 0) {

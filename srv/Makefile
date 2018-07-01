@@ -9,7 +9,7 @@ CC      = gcc -g
 
 RM      = rm -f
 
-CFLAGS += -Wextra -Wall -I include/ -lSDL2
+CFLAGS += -Wextra -Wall -I include/
 
 NAME_SERVER    = ../zappy_server
 
@@ -54,10 +54,6 @@ SRC_SERVER     =        src/main.c \
 			src/init_execution.c \
 			src/get_time_micro.c \
 			src/win.c \
-			src/draw_graphics.c \
-			src/draw_player.c \
-			src/draw_stones.c \
-			src/handle_graphics.c
 
 OBJ_SERVER     = $(SRC_SERVER:.c=.o)
 

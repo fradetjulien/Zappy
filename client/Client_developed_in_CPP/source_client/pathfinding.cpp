@@ -36,6 +36,7 @@ void	Ia::pathFinding()
 {
 	int x = _priorityPos.first;
 	int y = _priorityPos.second;
+	_actions.clear();
 	int	travelTime = getTravelTime(x, y);
 
 	switch (_playerOrientation) {
@@ -135,7 +136,7 @@ void	Ia::getPathWest(int x, int y)
 	}
 	if (y < _posPlayer.second) {
 		tmp_y = _posPlayer.second;
-		_actions.push_back(LEFT);
+		_actions.push_back(RIGHT);
 		while (tmp_y > y) {
 			_actions.push_back(FORWARD);
 			tmp_y--;
@@ -143,7 +144,7 @@ void	Ia::getPathWest(int x, int y)
 	}
 	else if (y > _posPlayer.second) {
 		tmp_y = y;
-		_actions.push_back(RIGHT);
+		_actions.push_back(LEFT);
 		while (tmp_y < y) {
 			_actions.push_back(FORWARD);
 			tmp_y++;
@@ -167,7 +168,7 @@ void	Ia::getPathSouth(int x, int y)
 	}
 	if (x < _posPlayer.first) {
 		tmp_x = _posPlayer.first;
-		_actions.push_back(LEFT);
+		_actions.push_back(RIGHT);
 		while (tmp_x > x) {
 			_actions.push_back(FORWARD);
 			tmp_x--;
@@ -175,7 +176,7 @@ void	Ia::getPathSouth(int x, int y)
 	}
 	else if (x > _posPlayer.first) {
 		tmp_x = x;
-		_actions.push_back(RIGHT);
+		_actions.push_back(LEFT);
 		while (tmp_x < x) {
 			_actions.push_back(FORWARD);
 			tmp_x++;

@@ -42,8 +42,8 @@ int execute_cmd(server *server)
 				server->client[i].is_connected = 0;
 				return (0);
 			}
-			if (win(server) == 1)
-				exit(1);
+			/*if (win(server) == 1)
+				exit(1);*/
 			s_execution *tmp = server->client[i].exec;
 			if (count_action(tmp) >= 10) {
 				server->client[i].exec = NULL;

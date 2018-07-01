@@ -19,6 +19,6 @@ t_rsrc *init_inventory()
 	inventory->nb_mendiane = 0;
 	inventory->nb_phiras = 0;
 	inventory->nb_thystame = 0;
-	inventory->nb_food = 0;
+	inventory->nb_food = 40;
 	return (inventory);
 }

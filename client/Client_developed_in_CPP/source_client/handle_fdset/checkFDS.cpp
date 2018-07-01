@@ -10,9 +10,9 @@
 void			Client::whichStep()
 {
     if (_isAlreadySend == 0 && isWelcome() == 0)
-        _step[_isAlreadySend]();
+		_step[_isAlreadySend]();
     else if (_isAlreadySend != 0)
-        _step[_isAlreadySend]();
+		_step[_isAlreadySend]();
 }
 
 int			Client::checkFDS()

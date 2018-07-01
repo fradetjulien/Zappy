@@ -51,6 +51,8 @@ void	send_vision(server *server, int i)
 	for (t_look *tmp = server->look; tmp != NULL; tmp = tmp->next) {
 		if (strcmp(tmp->str, ",") == 0) {
 			dprintf(server->client[i].fd, ",");
+			if (tmp->next == NULL)
+				dprintf(server->client[i].fd, "]\n");
 		}
 		else if (tmp->next == NULL) {
 			dprintf(server->client[i].fd, "%s]\n", tmp->str);

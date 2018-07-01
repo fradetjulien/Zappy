@@ -9,13 +9,13 @@
 #include <vector>
 
 enum Priority {
-    USELESS,
-    VERY_LOW,
-    LOW,
-    MEDIUM,
-    HIGH,
-    VERY_HIGH,
-    RARE
+    USELESS = 0,
+    VERY_LOW = 1,
+    LOW = 2,
+    MEDIUM = 3,
+    HIGH = 4,
+    VERY_HIGH = 5,
+    RARE = 6
 };
 
 enum Move {
@@ -50,13 +50,15 @@ public:
     void	pathFinding();
     void setSizeMap(int, int);
     std::string doActions(const std::size_t &);
-    void printPos();
+    std::string getPriority() const;
+    void checkLevelUp();
+    bool needLevelUp() const;
+    std::size_t     _level;
 
 private:
     std::vector<std::unordered_map<std::string, Priority >>  _priorityByLevel;
     std::vector<std::unordered_map<std::string, std::size_t>> _needByLevel;
     std::unordered_map<std::string, std::size_t>    _inventory;
-    std::size_t     _level;
     std::pair<int, int> _priorityPos;
     std::pair<int, int> _posPlayer;
     std::pair<int, int> _sizeMap;
@@ -69,6 +71,7 @@ private:
     int							_lifetime;
     Orientation						_playerOrientation;
     bool    _needFood;
+    bool    _levelUp;
 
     void initPriority();
     void initNeed();

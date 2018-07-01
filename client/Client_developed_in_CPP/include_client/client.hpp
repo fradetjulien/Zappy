@@ -27,7 +27,10 @@ enum Mode {
     LOOK,
     MOVE,
     PLV,
-    PPO
+    PPO,
+    INV,
+    INC,
+    DROP
 };
 
 class				Client
@@ -52,7 +55,9 @@ private:
     Mode _mode;
     bool _cmdSend;
     bool    _readCmd;
+    bool _moveDone;
 
+    void send_inventory();
     void send_look();
     void send_move();
     void send_ppo();
@@ -61,6 +66,7 @@ private:
     void execute_move();
     void execute_ppo();
     void execute_plv();
+    void execute_inventory();
 
 public:
 

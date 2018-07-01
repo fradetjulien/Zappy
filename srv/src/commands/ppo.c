@@ -19,10 +19,10 @@ static void print_ppo(server *server, int i)
 static void print_ppo2(server *server, int i, int id_player)
 {
 	if (id_player < server->nb_player) {
-		dprintf(server->client[i].fd, "ppo %d %d %d %d\n",
-		id_player, server->client[id_player].posX,
-		server->client[id_player].posY,
-		server->client[id_player].orient + 1);
+			dprintf(server->client[i].fd, "ppo %d %d %d %d\n",
+					id_player, server->client[id_player].posX,
+					server->client[id_player].posY,
+					server->client[id_player].orient + 1);
 	}
 	else {
 		dprintf(server->client[i].fd, "ko\n");

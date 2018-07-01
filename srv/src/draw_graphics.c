@@ -74,8 +74,9 @@ void	draw_rects(graphics *graph, server *server, int rwidth, int rheight)
 	for (int i = 0; i < nb_tiles; i++) {
 		pos.x = graph_pos.x;
 		pos.y = graph_pos.y;
-		draw_tiles(graph, pos, map_pos, server);
+		//draw_tiles(graph, pos, map_pos, server);
 		draw_ressources(graph, server, pos, map_pos);
+		draw_player(graph, pos);
 		set_rects_pos(&graph_pos, &map_pos, &rect_sizes, graph);
 	}
 }
